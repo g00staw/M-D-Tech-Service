@@ -6,22 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('ticketsmessages', function (Blueprint $table) {
+        Schema::create('ticketmessages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ticket_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->text('message_content');
+            $table->timestamp('sent_date');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('ticketsmessages');
+        Schema::dropIfExists('ticketmessages');
     }
 };
