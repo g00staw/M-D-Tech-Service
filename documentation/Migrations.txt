@@ -1,0 +1,209 @@
+// Migracja dla tabeli Clients
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateClientsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('clients', function (Blueprint $table) {
+            $table->id();
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('clients');
+    }
+}
+
+// Podobne migracje można utworzyć dla tabel Employees i Admins
+
+// Migracja dla tabeli Devices
+class CreateDevicesTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('devices', function (Blueprint $table) {
+            $table->id();
+            $table->string('brand');
+            $table->string('model');
+            $table->string('serial_number')->unique();
+            $table->date('purchase_date');
+            $table->text('problem_description');
+            $table->foreignId('client_id')->constrained();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('devices');
+    }
+}
+
+// Podobne migracje można utworzyć dla tabel Repairs, Ratings, Payments, Tickets i TicketMessages
+
+
+// Migracja dla tabeli Employees
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateEmployeesTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('employees', function (Blueprint $table) {
+            $table->id();
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('employees');
+    }
+}
+
+// Migracja dla tabeli Admins
+class CreateAdminsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('admins');
+    }
+}
+
+// Migracja dla tabeli Repairs
+class CreateRepairsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('repairs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('device_id')->constrained();
+            $table->foreignId('employee_id')->constrained();
+            $table->date('report_date');
+            $table->date('completion_date')->nullable();
+            $table->text('repair_notes')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('repairs');
+    }
+}
+
+// Migracja dla tabeli Ratings
+class CreateRatingsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('ratings', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('repair_id')->constrained();
+            $table->integer('rating');
+            $table->text('review')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('ratings');
+    }
+}
+
+// Migracja dla tabeli Payments
+class CreatePaymentsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('client_id')->constrained();
+            $table->foreignId('repair_id')->constrained();
+            $table->decimal('amount', 10, 2);
+            $table->date('payment_date');
+            $table->enum('status', ['pending', 'completed', 'cancelled']);
+            $table->enum('payment_method', ['credit_card', 'paypal']);
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('payments');
+    }
+}
+
+// Migracja dla tabeli TicketMessages
+class CreateTicketMessagesTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('ticket_messages', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('ticket_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->text('message_content');
+            $table->timestamp('sent_date');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('ticket_messages');
+    }
+}
+
+// Migracja dla tabeli Tickets
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateTicketsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('client_id')->constrained('clients');
+            $table->foreignId('employee_id')->constrained('employees');
+            $table->string('subject');
+            $table->text('problem_description');
+            $table->enum('status', ['open', 'in_progress', 'closed']);
+            $table->timestamp('creation_date');
+            $table->timestamp('closing_date')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('tickets');
+    }
+}

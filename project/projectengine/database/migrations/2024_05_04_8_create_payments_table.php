@@ -15,7 +15,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->date('payment_date');
             $table->enum('status', ['pending', 'completed', 'cancelled']);
-            $table->enum('payment_method', ['credit_card', 'paypal']);
+            $table->enum('payment_method', ['credit_card', 'paypal', 'cash']); // Dodano 'cash'
             $table->timestamps();
         });
     }
