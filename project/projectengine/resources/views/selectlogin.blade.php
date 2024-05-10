@@ -4,9 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>M&D Tech Service - Choose login</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link href="{{ asset('mystyles.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -16,55 +19,95 @@
         <div id="start">
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="src/logo.png" class="d-block w-50" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h1 class="text-white">Niesamowite przeżycia!</h1>
+                    <div class="carousel-item d-flex justify-content-center align-items-center active">
+                        <img src="src/logowhite.png" class="d-block w-50" alt="...">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <section class="vh-100">
+                    <div class="container-fluid border-radius h-custom bg-white p-5 bg-opacity-50">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-md-9 col-lg-6 col-xl-5">
+                                <img src="src/name.png" class="img-fluid w-50" alt="Sample image">
+                                <h2 class="text-white pt-3">Zaloguj się</h2>
+                            </div>
+                            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                                <form>
+
+                                    <!-- Email input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="email" id="form3Example3"
+                                            class="form-control form-control-lg bg-white bg-opacity-75   "
+                                            placeholder="Podaj swój adres email" />
+                                        <label class="form-label" for="form3Example3">Adres email</label>
+                                    </div>
+
+                                    <!-- Password input -->
+                                    <div data-mdb-input-init class="form-outline mb-3">
+                                        <input type="password" id="form3Example4"
+                                            class="form-control form-control-lg bg-white bg-opacity-75"
+                                            placeholder="Podaj hasło" />
+                                        <label class="form-label" for="form3Example4">Hasło</label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                            class="btn btn-primary btn-lg"
+                                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Zaloguj</button>
+                                        <a href="#!" class="text-body">Odzyskiwanie hasła</a>
+                                    </div>
+
+                                    <div class="text-center justify-content-center">
+                                        <p class="small fw-bold mt-2 pt-1 mb-0">Nie masz konta? <a href="#!"
+                                                class="link-danger">Zarejestruj się.</a></p>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                </section>
+
             </div>
-        </div>
 
 
-        <br>
-
-        <div class="row justify-content-md-center">
-            <div class="col d-flex justify-content-center">
-                <div class="card" style="width: 18rem;">
-                    <img src="" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Użytkownik</h5>
-                        <p class="card-text">Kliknij poniższy przycisk aby przejść do panelu logowania.</p>
-                        <a href="#" class="btn btn-primary">Zaloguj się.</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex justify-content-center   ">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
+    <footer>
+                <div class="footer">         
+                    <div class="row">
+                        <ul>
+                            <li>
+                                <a>Autor: </a>
+                                <a>Konrad Pluta</a>
+                            </li>
+                            <li>
+                                <a>E-mail:</a>
+                                <a>adres@email.com</a>
+                            </li>
+                            <li>
+                                <a>Numer telefonu:</a> 
+                                <a>+48 123 456 789</a>
+                            </li>
+                            <li>
+                                <a>Zgłoś:</a> 
+                                <a href="">Formularz zgłoszeniowy</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        Strona stworzona na potrzeby projektu z przedmiotu: Aplikacje Internetowe.
+                    </div>
+                </div>
+            </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+
 
 </html>

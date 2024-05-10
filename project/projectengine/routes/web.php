@@ -10,6 +10,11 @@ Route::get('/selectlogin', function () {
     return view('selectlogin');
 });
 
+Route::get('/dashboard-client', function () {
+    return view('clientdashboard');
+});
+
+
 
 
 Auth::routes();
