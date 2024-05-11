@@ -1,4 +1,4 @@
-body {
+.body-grad {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradientAnimation 15s ease infinite;
@@ -17,9 +17,13 @@ body {
 	}
   }
   
-
 .border-radius {
     border-radius: 25px;
+}
+
+.img-logo-size{
+  max-width: 100px;
+  max-height: 100px;
 }
 
 footer{
@@ -82,4 +86,37 @@ footer{
     .footer .row a i{
     margin:0% 3%;
     }
+}
+
+.custom-column {
+  max-height: 200px; /* Ustawia maksymalną wysokość kolumny na 200px */
+}
+
+
+.button-anim{
+  background-color: #23a6d5;
+}
+
+.btn {
+  background-size: 0% 100%;
+  border:none;
+  border-radius:4px;
+	outline:none;
+	text-align:center;
+	text-decoration:none;
+  transition: background-color .5s;
+}
+		
+.btn:hover {
+  background-color:#5588f5;
+  background-image:linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, #1a5ae6 100%);
+  background-repeat:no-repeat;
+  background-size: 200% 100%; 
+  transition:background-size 1s, background-color 1s;
+}
+		
+.btn:active {background-color:#5588f5; transition:background-size 0}
+
+.max-witdh{
+  width: 75%;
 }

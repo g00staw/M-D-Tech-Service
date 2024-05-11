@@ -12,7 +12,7 @@
     <link href="{{ asset('mystyles.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="body-grad">
 
 
     <div class="container text-center">
