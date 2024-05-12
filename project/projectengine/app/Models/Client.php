@@ -11,6 +11,12 @@ class Client extends Model
 
     protected $fillable = ['username', 'password', 'email'];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+
     public function devices()
     {
         return $this->hasMany(Device::class);

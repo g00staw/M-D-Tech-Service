@@ -14,6 +14,11 @@
 
 <body class="body-grad">
 
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <div class="container text-center">
         <div id="start">
@@ -34,28 +39,28 @@
                                 <h2 class="text-white pt-3">Zaloguj się</h2>
                             </div>
                             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                                <form>
-
+                                <form method="POST" action="{{ route('login.authenticate') }}">
+                                    @csrf
                                     <!-- Email input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="form3Example3"
-                                            class="form-control form-control-lg bg-white bg-opacity-75   "
+                                        <input id="email" name="email" type="text" class="form-control form-control-lg bg-white bg-opacity-75 @if ($errors->first('email')) is-invalid @endif" value="{{ old('email') }}"
                                             placeholder="Podaj swój adres email" />
-                                        <label class="form-label" for="form3Example3">Adres email</label>
+                                            <div class="invalid-feedback">Nieprawidłowy email!</div>
+                                        <label class="form-label" for="email" :value="__('Email')">Adres email</label>
                                     </div>
 
                                     <!-- Password input -->
                                     <div data-mdb-input-init class="form-outline mb-3">
-                                        <input type="password" id="form3Example4"
-                                            class="form-control form-control-lg bg-white bg-opacity-75"
+                                        <input id="password" name="password" type="password" class="bg-white bg-opacity-75 form-control @if ($errors->first('password')) is-invalid @endif"
                                             placeholder="Podaj hasło" />
-                                        <label class="form-label" for="form3Example4">Hasło</label>
+                                            <div class="invalid-feedback">Nieprawidłowe hasło!</div>
+                                        <label class="form-label" for="password" :value="__('Password')">Hasło</label>
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
                                             class="btn btn-primary btn-lg"
-                                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Zaloguj</button>
+                                            style="padding-left: 2.5rem; padding-right: 2.5rem;">{{ __('Zaloguj') }}</button>
                                         <a href="#!" class="text-body">Odzyskiwanie hasła</a>
                                     </div>
 
@@ -77,32 +82,32 @@
     </div>
 
     <footer>
-                <div class="footer">         
-                    <div class="row">
-                        <ul>
-                            <li>
-                                <a>Autor: </a>
-                                <a>Konrad Pluta</a>
-                            </li>
-                            <li>
-                                <a>E-mail:</a>
-                                <a>adres@email.com</a>
-                            </li>
-                            <li>
-                                <a>Numer telefonu:</a> 
-                                <a>+48 123 456 789</a>
-                            </li>
-                            <li>
-                                <a>Zgłoś:</a> 
-                                <a href="">Formularz zgłoszeniowy</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="row">
-                        Strona stworzona na potrzeby projektu z przedmiotu: Aplikacje Internetowe.
-                    </div>
-                </div>
-            </footer>
+        <div class="footer">
+            <div class="row">
+                <ul>
+                    <li>
+                        <a>Autor: </a>
+                        <a>Konrad Pluta</a>
+                    </li>
+                    <li>
+                        <a>E-mail:</a>
+                        <a>adres@email.com</a>
+                    </li>
+                    <li>
+                        <a>Numer telefonu:</a>
+                        <a>+48 123 456 789</a>
+                    </li>
+                    <li>
+                        <a>Zgłoś:</a>
+                        <a href="">Formularz zgłoszeniowy</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                Strona stworzona na potrzeby projektu z przedmiotu: Aplikacje Internetowe.
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -21,7 +21,7 @@
 
       <div class="col-sm col-md-4 border border-primary p-3 border-radius">
         <div class="card text-bg-light">
-          <img src="src/device.jpg" class="card-img" alt="...">
+          <img src="public/src/device.jpg" class="card-img" alt="...">
           <div class="card-img-overlay">
             <h5 class="card-title text-primary">Ostatnie naprawy</h5>
             <p class="card-text text-primary">Naciśnij "Zobacz więcej." przy urządzeniu aby
