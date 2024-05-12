@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-opacity-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary box-shadow">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
@@ -59,35 +59,30 @@
       <!-- Left links -->
 
       <!-- Right links -->
-      <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
-      <li class="nav-item dropdown text-center mx-2 mx-lg-1 btn">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
-            aria-expanded="false">
-            <div>
-
+      <div class="navbar-nav ms-auto d-flex flex-row mt-lg-0">
+            @if (Auth::check())
+            <div class="btn-group dropstart bg-opacity-50">
+              <button type="button" class="btn bg-transparent btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::user()->name }}
+              </button>
+              <ul class="dropdown-menu ">
+                <a class="nav-link text-dark" href="{{ route('logout') }}">Wyloguj się... </a>
+              </ul>
             </div>
-            <img src="src/man.png" height="40">
-            użytkownik   
-          </a>
-          <!-- Dropdown menu -->
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+
+            @else
+                    <a class="nav-link" href="{{ route('login') }}">Zaloguj się...</a>
+            @endif  
+            <img src="src/man.png" height="50">
+      </div>
       <!-- Right links -->
 
       <!-- Search form -->
     </div>
     <!-- Collapsible wrapper -->
+    @include('shared.success-toast')
   </div>
   <!-- Container wrapper -->
+  
 </nav>
 <!-- Navbar -->

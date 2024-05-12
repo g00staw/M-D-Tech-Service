@@ -14,18 +14,12 @@
 
 <body class="body-grad">
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <div class="container text-center">
         <div id="start">
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item d-flex justify-content-center align-items-center active">
-                        <img src="src/logowhite.png" class="d-block w-50" alt="...">
+                        <img src="/src/logowhite.png" class="d-block w-50" alt="...">
                     </div>
                 </div>
             </div>
@@ -35,7 +29,7 @@
                     <div class="container-fluid border-radius h-custom bg-white p-5 bg-opacity-50">
                         <div class="row d-flex justify-content-center align-items-center h-100">
                             <div class="col-md-9 col-lg-6 col-xl-5">
-                                <img src="src/name.png" class="img-fluid w-50" alt="Sample image">
+                                <img src="/src/name.png" class="img-fluid w-50" alt="Sample image">
                                 <h2 class="text-white pt-3">Zaloguj się</h2>
                             </div>
                             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -109,9 +103,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </body>
 
 

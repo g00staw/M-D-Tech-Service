@@ -115,8 +115,13 @@ footer{
   transition:background-size 1s, background-color 1s;
 }
 		
-.btn:active {background-color:#5588f5; transition:background-size 0}
+.btn:active {background-color:#1f65fd; transition:background-size 0}
 
 .max-witdh{
   width: 75%;
+}
+
+.box-shadow{
+  background-color: #1f65fdcd;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Cień pod navbar */
 }

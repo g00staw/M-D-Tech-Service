@@ -9,11 +9,11 @@ class Device extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['brand', 'model', 'serial_number', 'purchase_date', 'problem_description', 'client_id'];
+    protected $fillable = ['brand', 'model', 'serial_number', 'purchase_date','type', 'client_id'];
 
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 
     public function repairs()

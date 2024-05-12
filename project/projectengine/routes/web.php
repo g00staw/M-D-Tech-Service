@@ -12,6 +12,7 @@ Route::get('/dashboard', function () {
     return view('user.clientdashboard');
 })->name('dashboard');
 
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');
     Route::post('/auth/login', 'authenticate')->name('login.authenticate');

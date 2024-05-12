@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('repair_id')->constrained();
             $table->decimal('amount', 10, 2);
             $table->date('payment_date');

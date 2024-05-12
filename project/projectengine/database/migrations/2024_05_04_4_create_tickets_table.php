@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('employee_id')->constrained('employees');
             $table->string('subject');
             $table->text('problem_description');
