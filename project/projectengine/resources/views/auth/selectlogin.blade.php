@@ -35,6 +35,7 @@
                             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                                 <form method="POST" action="{{ route('login.authenticate') }}">
                                     @csrf
+                                    <input type="hidden" name="guard" value="employee">
                                     <!-- Email input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <input id="email" name="email" type="text" class="form-control form-control-lg bg-white bg-opacity-75 @if ($errors->first('email')) is-invalid @endif" value="{{ old('email') }}"

@@ -13,7 +13,7 @@ class EmployeesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::factory()->create([
+        Employee::insert([
             'name' => 'Test Employee',
             'email' => 'test@employee.com',
             'password' => '1234',

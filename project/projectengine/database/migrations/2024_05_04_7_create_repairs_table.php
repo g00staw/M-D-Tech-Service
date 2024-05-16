@@ -1,4 +1,4 @@
-<?php
+0<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('device_id')->constrained();
             $table->foreignId('employee_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->date('report_date');
             $table->date('completion_date')->nullable();
             $table->text('user_notes')->nullable();

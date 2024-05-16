@@ -17,7 +17,7 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
         <li class="nav-item text-center mx-2 mx-lg-1 btn">
-          <a class="nav-link active" aria-current="page" href="#!">
+          <a class="nav-link active" aria-current="page" href="{{ route('userdashboard') }}">
             <div class>
               <i class="fas fa-home fa-lg mb-1"></i>
               <img src="src/house.png">
@@ -26,7 +26,7 @@
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1 btn">
-          <a class="nav-link" href="#!">
+          <a class="nav-link" href="{{ route('userdashboard.devices') }}">
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
               <img src="src/responsive.png" height="30">

@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('model');
             $table->string('serial_number')->unique();
             $table->date('purchase_date');
+            $table->date('end_of_warranty');
             $table->text('type');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

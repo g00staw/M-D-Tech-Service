@@ -11,10 +11,45 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('userdashboard');
         }
         return view('auth.selectlogin');
     }
+
+    /* public function login(Request $request)
+    {
+        $guard = $request->input('guard', 'web');
+
+        if (Auth::guard($guard)->check()) {
+            switch ($guard) {
+                case 'employee':
+                    return redirect()->route('employee.dashboard');
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                default:
+                    return redirect()->route('user.dashboard');
+            }
+        }
+
+        return view('auth.selectlogin', compact('guard'));
+    } */
+
+
+   /*  public function employeeLogin()
+    {
+        if (Auth::guard('employee')->check()) {
+            return redirect()->route('employee.dashboard');
+        }
+        return view('auth.employee_login');
+    }
+
+    public function adminLogin()
+    {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return view('auth.admin_login');
+    } */
 
     /**
      * Handle an authentication attempt.
@@ -33,8 +68,8 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             $user = Auth::user(); // Pobierz aktualnie zalogowanego użytkownika
-    
-            return redirect()->route('dashboard')->with('user', $user); // Przekazanie użytkownika do widoku
+
+            return redirect()->route('userdashboard')->with('user', $user); // Przekazanie użytkownika do widoku
         }
 
         return back()->withErrors([
@@ -47,8 +82,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('dashboard');
+        return redirect()->route('userdashboard');
     }
-
-
 }

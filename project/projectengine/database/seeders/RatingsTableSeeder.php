@@ -15,9 +15,11 @@ class RatingsTableSeeder extends Seeder
          * Run the database seeds.
          */
         Rating::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => '1234',
+            'user_id' => '1',
+            'repair_id' => '1',
+            'rating' => 5,
+            'review' => "wszystko ok",
+
         ]);
     }
 }

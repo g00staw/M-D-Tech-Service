@@ -67,32 +67,34 @@
           </div>
         </div>
         <table class="table table-hover">
-          <thead>
+    <thead>
+        <tr>
+            <th>Urządzenie</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Status Naprawy</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(auth()->check() && auth()->user()->devices && auth()->user()->devices->isNotEmpty())
+            @foreach (auth()->user()->devices as $device)
+                @foreach ($device->repairs as $repair)
+                    <tr>
+                        <td>{{ $device->type }}</td>
+                        <td>{{ $device->brand }}</td>
+                        <td>{{ $device->model }}</td>
+                        <td>{{ $repair->status }}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+        @else
             <tr>
-              <th>Urządzenie</th>
-              <th>Marka</th>
-              <th>Model</th>
-              <th></th>
+                <td colspan="4">Brak urządzeń do wyświetlenia.</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-          </tbody>
-        </table>
+        @endif
+    </tbody>
+</table>
+
       </div>
     </div>
     <div class="row justify-content-center align-items-center p-3 custom-row ">
