@@ -28,6 +28,6 @@ class UserDashboardController extends Controller
 
         $devices = \App\Models\Device::where('user_id', $user->id)->paginate(10);
 
-        return view('user.devices', ['user' => $user, 'devices' => $devices]);
+        return view('userdashboard.devices', ['user' => $user, 'devices' => $devices]);
     }
 }

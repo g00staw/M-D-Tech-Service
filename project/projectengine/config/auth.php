@@ -35,17 +35,18 @@ return [
     |
     */
 
+
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-    
+
         'employee' => [
             'driver' => 'session',
             'provider' => 'employees',
         ],
-    
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -68,24 +69,23 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+    
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-    
+
         'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
         ],
-    
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

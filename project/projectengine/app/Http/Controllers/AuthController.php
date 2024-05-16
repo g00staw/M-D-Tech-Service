@@ -23,7 +23,7 @@ class AuthController extends Controller
         if (Auth::guard($guard)->check()) {
             switch ($guard) {
                 case 'employee':
-                    return redirect()->route('employee.dashboard');
+                    return redirect()->route('employee.dashboard'); 
                 case 'admin':
                     return redirect()->route('admin.dashboard');
                 default:
@@ -35,21 +35,21 @@ class AuthController extends Controller
     } */
 
 
-   /*  public function employeeLogin()
-    {
-        if (Auth::guard('employee')->check()) {
-            return redirect()->route('employee.dashboard');
-        }
-        return view('auth.employee_login');
-    }
+    /*  public function employeeLogin()
+     {
+         if (Auth::guard('employee')->check()) {
+             return redirect()->route('employee.dashboard');
+         }
+         return view('auth.employee_login');
+     }
 
-    public function adminLogin()
-    {
-        if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
-        }
-        return view('auth.admin_login');
-    } */
+     public function adminLogin()
+     {
+         if (Auth::guard('admin')->check()) {
+             return redirect()->route('admin.dashboard');
+         }
+         return view('auth.admin_login');
+     } */
 
     /**
      * Handle an authentication attempt.
@@ -64,17 +64,24 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        // Spróbuj zalogować się jako admin
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect()->route('admin.dashboard');
+        }
 
-            $user = Auth::user(); // Pobierz aktualnie zalogowanego użytkownika
+        // Spróbuj zalogować się jako pracownik
+        if (Auth::guard('employee')->attempt($credentials)) {
+            return redirect()->route('employee.dashboard');
+        }
 
-            return redirect()->route('userdashboard')->with('user', $user); // Przekazanie użytkownika do widoku
+        // Spróbuj zalogować się jako użytkownik
+        if (Auth::guard('web')->attempt($credentials)) {
+            return redirect()->route('userdashboard');
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        ]);
     }
 
     public function logout(Request $request)

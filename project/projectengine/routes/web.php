@@ -18,27 +18,7 @@ Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserD
 
 Route::get('/userdashboard', [UserDashboardController::class, 'showDashboard'])->name('userdashboard');
 
-/*
-// Dashboard dla różnych typów użytkowników
-Route::middleware(['auth:user'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.clientdashboard');
-    })->name('user.dashboard');
-});
 
-Route::middleware(['auth:employee'])->group(function () {
-    Route::get('/employee/dashboard', function () {
-        return view('employee.dashboard');
-    })->name('employee.dashboard');
-});
-
-Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-});
-
-*/
 
 // Panel urządzeń dla użytkownika
 Route::middleware(['auth:user'])->group(function () {

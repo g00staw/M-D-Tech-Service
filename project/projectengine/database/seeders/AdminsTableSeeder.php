@@ -13,10 +13,10 @@ class AdminsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::insert([
-            'name' => 'Test Admin',
-            'email' => 'test@admin.com',
+        Admin::factory()->create([
+            'name' => 'Admin Test',
+            'email' => 'admin@admin.com',
             'password' => '1234',
-        ]);
+        ]);;
     }
 }
