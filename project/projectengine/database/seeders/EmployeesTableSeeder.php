@@ -13,10 +13,10 @@ class EmployeesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::insert([
-            'name' => 'Test Employee',
-            'email' => 'test@employee.com',
+        Employee::factory()->create([
+            'name' => 'employee Test',
+            'email' => 'emp@emp.com',
             'password' => '1234',
-        ]);
+        ]);;
     }
 }

@@ -17,7 +17,8 @@ class DevicesTableSeeder extends Seeder
             'brand' => 'Samsung',
             'model' => 'S23',
             'serial_number' => '8957981372527',
-            'purchase_date' => '2023-10-10', // poprawny format!
+            'purchase_date' => '2023-10-10',
+            'end_of_warranty' => '2025-10-10', // poprawny format!
             'type' => 'smartphone',
             'user_id' => '1',
         ]);

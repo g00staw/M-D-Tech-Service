@@ -14,7 +14,7 @@ class RatingsTableSeeder extends Seeder
         /**
          * Run the database seeds.
          */
-        Rating::factory()->create([
+        Rating::insert([
             'user_id' => '1',
             'repair_id' => '1',
             'rating' => 5,

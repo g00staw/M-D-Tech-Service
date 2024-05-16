@@ -10,9 +10,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/userdashboard', function () {
+Route::get('/user-dashboard', function () {
     return view('user.clientdashboard');
 })->name('userdashboard');
+
+Route::get('/admin-dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin-dashboard');
+
+Route::get('/employee-dashboard', function () {
+    return view('employee.dashboard');
+})->name('employee-dashboard');
 
 Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
 
