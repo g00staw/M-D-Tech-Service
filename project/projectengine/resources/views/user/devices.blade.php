@@ -16,30 +16,37 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid ">
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Typ urządzenia</th>
-                    <th>Marka</th>
-                    <th>Model</th>
-                    <th>Numer seryjny</th>
-                    <th>Data zakupu</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($devices as $device)
-                <tr>
-                    <td>{{ $device->type }}</td>
-                    <td>{{ $device->brand }}</td>
-                    <td>{{ $device->model }}</td>
-                    <td>{{ $device->serial_number }}</td>
-                    <td>{{ $device->purchase_date }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+  <div class="container-fluid d-flex flex-column align-items-center m-3">
+    <h1>Twoje urządzenia</h1>
+    <div class="custom-container p-3">
+      <div class="table-responsive">
+          <table class="table table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th>Typ urządzenia</th>
+                      <th>Marka</th>
+                      <th>Model</th>
+                      <th>Numer seryjny</th>
+                      <th>Data zakupu</th>
+                      <th>Koniec gwarancji</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach ($devices as $device)
+                  <tr>
+                      <td>{{ $device->type }}</td>
+                      <td>{{ $device->brand }}</td>
+                      <td>{{ $device->model }}</td>
+                      <td>{{ $device->serial_number }}</td>
+                      <td>{{ $device->purchase_date }}</td>
+                      <td>{{ $device->end_of_warranty }}</td>
+                      <td><a class="text-primary" href="">Zobacz więcej</a></td>
+                  </tr>
+                  @endforeach
+              </tbody>
+          </table>
+      </div>
     </div>
     <!-- Linki do paginacji -->
     <div class="d-flex justify-content-center">

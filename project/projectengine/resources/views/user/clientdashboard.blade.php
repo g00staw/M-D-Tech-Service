@@ -66,7 +66,28 @@
       </div>
     </div>
 
-    <div class="container-fluid"></div>
+    <div class="container border border-primary bg border-radius">
+      <div class="d-flex flex-column align-items-center p-3 ">
+        <h2>Dostępne usługi</h2>
+        <div class="container d-flex flex-wrap justify-content-center">
+            @foreach ($services as $service)
+              <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{$service -> title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Cena min*: {{$service -> price_min}}</h6>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Cena max*: {{$service -> price_max}}</h6>
+                  <p class="card-text">{{$service -> description}}</p>
+                  <div class="mt-auto p-2">
+                    <a href="#" class="card-link text-primary">Zobacz więcej.</a>
+                  </div>
+                </div>
+              </div>
+            @endforeach
+            
+        </div>
+        <h6 class="card-subtitle mb-2 text-body-secondary">* - cena proponowana, zależna od urządzenia oraz wartości części</h6>
+      </div>
+    </div>
 
     <div class="row justify-content-center align-items-center p-3 custom-row">
       <div class="col-sm col-md-8 border border-primary p-3 border-radius m-3 custom-container">

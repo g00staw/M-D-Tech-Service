@@ -28,11 +28,6 @@ Route::get('/userdashboard', [UserDashboardController::class, 'showDashboard'])-
 
 
 
-// Panel urządzeń dla użytkownika
-Route::middleware(['auth:user'])->group(function () {
-    Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
-});
-
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');
