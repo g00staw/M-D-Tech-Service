@@ -125,3 +125,25 @@ footer{
   background-color: #1f65fdcd;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Cień pod navbar */
 }
+
+.custom-container {
+  width: 60%; /* Szerokość kontenera ustawiona na 60% */
+  margin: 0 auto; /* Wyśrodkowanie kontenera */
+}
+
+.carousel-item img {
+  width: 100%;  /* Ustawienie szerokości na 100% */
+  height: 50vh; /* Ustawienie wysokości na 50% wysokości widocznego obszaru przeglądarki */
+  object-fit: cover; /* Zapewnienie, że obraz będzie skalowany i przycięty bez zniekształceń */
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #6a11cb;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
+}

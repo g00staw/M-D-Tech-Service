@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary box-shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary gradient-custom box-shadow">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
