@@ -13,10 +13,11 @@ return new class extends Migration
             $table->foreignId('device_id')->constrained();
             $table->foreignId('employee_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->text('status')->nullable();
             $table->date('report_date');
             $table->date('completion_date')->nullable();
             $table->text('user_notes')->nullable();
-            $table->text('status')->nullable();
+            $table->text('repair_title');
             $table->timestamps();
         });
     }

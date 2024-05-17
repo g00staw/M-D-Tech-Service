@@ -65,6 +65,9 @@
         </button>
       </div>
     </div>
+
+    <div class="container-fluid"></div>
+
     <div class="row justify-content-center align-items-center p-3 custom-row">
       <div class="col-sm col-md-8 border border-primary p-3 border-radius m-3 custom-container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -76,24 +79,54 @@
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
               role="tab" aria-controls="profile" aria-selected="false">Dlaczego warto pisać opinie?</button>
           </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
-              role="tab" aria-controls="contact" aria-selected="false">Napisz swoją opinię!</button>
-          </li>
         </ul>
-        <div class="tab-content p-3" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Primary card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
+        <div class="tab-content p-3 flex-column justify-content-center" id="myTabContent">
+          <div class="flex-column tab-pane fade show active justify-content-center" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="d-inline-flex justify-content-center">
+              @foreach ($ratings as $rating)
+               <div class="card text-bg-primary m-1" style="max-width: 18rem;">
+                   <div class="card-header">
+                     <p class="font-weight-light">Użytkownik:</p>
+                     <h5>{{ $rating->user->name }}</h5>
+                   </div>
+                   <div class="card-body">
+                       <p class="font-weight-light">Tytuł naprawy:</p>
+                       <h5 class="card-title">{{ $rating->repair->repair_title }}</h5>
+                       <h5 class="card-title">Ocena: {{ $rating->rating }} / 5</h5>
+                       <p class="card-text">Komenatrz: {{ $rating->review }}</p>
+                   </div>
+               </div>
+              @endforeach
+            </div>
+        
+            <ul class="pagination pagination-sm justify-content-center">
+              @for ($i = 1; $i <= $ratings->lastPage(); $i++)
+                  <li class="page-item {{ ($ratings->currentPage() == $i) ? 'active' : '' }}">
+                      <a class="page-link" href="{{ $ratings->url($i) }}">{{ $i }}</a>
+                  </li>
+              @endfor
+           </ul>
+
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                <h3 class="fs-1 fs-2 fs-4">Dlaczego warto oceniać produkty?</h3>
+                  <p class="fs-1 fs-2 fs-4">
+                  Pomagasz innym klientom zdecydować się na naprawę swoich urządzeń.  <br>
+                  Przekazujesz nam cenne wskazówki o ofercie i jakości usług. <br>
+                  Dołączysz do grona ekspertów naszego serwisu! <br>
+                  </p>
+                  <p class="fs-4">
+                    Napisz swoją opinię! <a class="text-primary">Zobacz więcej.</a>
+                  </p>
+                </div>
+                <div class="col">
+                  <img src="/src/like.jpg" class="img-fluid border-radius">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
         </div>
       </div>
     </div>

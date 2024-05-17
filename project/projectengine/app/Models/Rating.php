@@ -16,6 +16,11 @@ class Rating extends Model
         return $this->belongsTo(Repair::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function showRatings()
     {
         $ratings = \App\Models\Rating::paginate(10); // Wyświetla 10 opinii na stronę

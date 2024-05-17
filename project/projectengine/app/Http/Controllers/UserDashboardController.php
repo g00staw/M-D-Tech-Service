@@ -13,13 +13,10 @@ class UserDashboardController extends Controller
 {
     public function showDashboard()
     {
-        // Pobierz wszystkich użytkowników wraz z ich ocenami
-        $usersWithRatings = DB::table('users')
-            ->join('ratings', 'users.id', '=', 'ratings.user_id')
-            ->select('users.*', 'ratings.*')
-            ->paginate(10);
+        // Pobierz wszystkie oceny wraz z danymi użytkowników i napraw
+        $ratings = Rating::with('user', 'repair')->paginate(5);
 
-        return view('user.clientdashboard', ['usersWithRatings' => $usersWithRatings]);
+        return view('user.clientdashboard', ['ratings' => $ratings]);
     }
 
     public function showUserDevices()
