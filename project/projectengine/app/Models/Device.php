@@ -20,4 +20,12 @@ class Device extends Model
     {
         return $this->hasMany(Repair::class);
     }
+
+    public function monthsUntilWarrantyExpires()
+    {
+        $end_date = $this->end_of_warranty;
+        $today = now();
+
+        return round($today->diffInMonths($end_date, false));
+    }
 }

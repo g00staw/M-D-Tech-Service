@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Device;
 use App\Models\Techservice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
@@ -26,8 +27,20 @@ class UserDashboardController extends Controller
     {
         $user = auth()->user();
 
-        $devices = \App\Models\Device::where('user_id', $user->id)->paginate(10);
+        $devices = Device::where('user_id', $user->id)->paginate(10);
 
         return view('user.devices', ['user' => $user, 'devices' => $devices]);
+    }
+
+    public function findDevice($id)
+    {
+        $device = Device::findOrFail($id);
+
+        $months_left = $device->monthsUntilWarrantyExpires();
+
+        return view('user.showdevice', [
+            'device' => $device,
+            'months_left' => $months_left,
+        ]);
     }
 }

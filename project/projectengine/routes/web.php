@@ -22,9 +22,15 @@ Route::get('/employee-dashboard', function () {
     return view('employee.dashboard');
 })->name('employee-dashboard');
 
-Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
+Route::controller(UserDashboardController::class)->group(function(){
+    Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices');
+    Route::get('/userdashboard','showDashboard')->name('userdashboard');
+    Route::get('/userdashboard/device/{id}', 'findDevice')->name('userdashboard.device');
+});
 
-Route::get('/userdashboard', [UserDashboardController::class, 'showDashboard'])->name('userdashboard');
+/* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
+
+Route::get('/userdashboard', [UserDashboardController::class, 'showDashboard'])->name('userdashboard'); */
 
 
 

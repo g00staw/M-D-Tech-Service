@@ -41,7 +41,7 @@
                       <td>{{ $device->serial_number }}</td>
                       <td>{{ $device->purchase_date }}</td>
                       <td>{{ $device->end_of_warranty }}</td>
-                      <td><a class="text-primary" href="">Zobacz więcej</a></td>
+                      <td><a class="text-primary" href="{{route('userdashboard.device', $device->id)}}">Zobacz więcej</a></td>
                   </tr>
                   @endforeach
               </tbody>
