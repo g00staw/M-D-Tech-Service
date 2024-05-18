@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Repair;
 use App\Models\Techservice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
@@ -73,6 +74,10 @@ class UserDashboardController extends Controller
     }
 
     public function showRepairs(){
-        return view('user.repairs');
+        $user = auth()->user();
+
+        $repairs = $user->repairs()->with('device')->paginate(10);
+
+        return view('user.repairs', ['user' => $user, 'repairs' => $repairs]);
     }
 }

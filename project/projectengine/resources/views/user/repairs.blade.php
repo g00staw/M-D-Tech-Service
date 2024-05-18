@@ -44,6 +44,20 @@
                       <th class="m-3">Opis zgłoszenia</th>
                       <th></th>
                   </tr>
+                  @foreach ( $repairs as $repair )
+                  <tr>
+                        <td>{{$repair->repair_title}}</td>
+                        <td>{{$repair->device->type}}</td>
+                        <td>{{$repair->device->brand}}</td>
+                        <td>{{$repair->device->model}}</td>
+                        <td>{{$repair->device->serial_number}}</td>
+                        <td>{{$repair->status}}</td>
+                        <td>{{$repair->report_date}}</td>
+                        <td>{{$repair->completion_date}}</td>
+                        <td>{{$repair->user_notes}}</td>
+                        <td><a href="{{route('userdashboard.add.device')}}" class="btn btn-primary">Zobacz więcej</a></td>
+                  </tr>
+                  @endforeach
               </thead>
               <tbody>
 

@@ -35,7 +35,7 @@
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1 btn">
-          <a class="nav-link" href="#!">
+          <a class="nav-link" href="{{ route('userdashboard.repairs') }}">
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
               <img src="src/settings.png" height="30">
@@ -45,7 +45,7 @@
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1 btn">
-          <a class="nav-link" aria-disabled="true" href="#!">
+          <a class="nav-link" aria-disabled="true" href="">
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
               <img src="src/mail.png" height="30">
