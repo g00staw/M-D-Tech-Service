@@ -35,13 +35,25 @@ class DatabaseSeeder extends Seeder
         ]);;
 
         Device::insert([
-            'brand' => 'Samsung',
-            'model' => 'S23',
-            'serial_number' => '8957981372527',
-            'purchase_date' => '2023-10-10',
-            'end_of_warranty' => '2025-10-10', // poprawny format!
-            'type' => 'smartphone',
-            'user_id' => '1',
+            [
+                'brand' => 'Samsung',
+                'model' => 'S23',
+                'serial_number' => '0385298571',
+                'purchase_date' => '2023-10-10',
+                'end_of_warranty' => '2025-10-10', // poprawny format!
+                'type' => 'smartphone',
+                'user_id' => '1',
+            ],
+            [
+                'brand' => 'iPhone',
+                'model' => '13 Pro',
+                'serial_number' => '7512012957',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2026-05-07',
+                'type' => 'smartphone',
+                'user_id' => null,
+            ],
+
         ]);
 
         Employee::factory()->create([

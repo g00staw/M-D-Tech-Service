@@ -25,7 +25,10 @@ Route::get('/employee-dashboard', function () {
 Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices');
     Route::get('/userdashboard','showDashboard')->name('userdashboard');
+    Route::get('/userdashboard/device/add','addUserDevice')->name('userdashboard.add.device');
+    Route::post('/userdashboard/device/add', 'addDeviceToUser')->name('userdashboard.add.device.store');
     Route::get('/userdashboard/device/{id}', 'findDevice')->name('userdashboard.device');
+    Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

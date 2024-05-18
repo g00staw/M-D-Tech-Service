@@ -32,6 +32,10 @@ class UserDashboardController extends Controller
         return view('user.devices', ['user' => $user, 'devices' => $devices]);
     }
 
+    public function addUserDevice(){
+        return view('user.adddevice');
+    }
+
     public function findDevice($id)
     {
         $device = Device::findOrFail($id);
@@ -42,5 +46,33 @@ class UserDashboardController extends Controller
             'device' => $device,
             'months_left' => $months_left,
         ]);
+    }
+
+    public function addDeviceToUser(Request $request){
+
+        $serial_number = $request->input('serialnumber');
+        $purchase_date = $request->input('purchase-date');
+        $user_id = auth()->id();
+
+        $device = Device::where('serial_number', $serial_number)
+                        ->where('purchase_date', $purchase_date)
+                        ->first();
+        
+        if($device == null) {
+            return back()->with(['error' => "Nie znaleziono urządzenia o podanym numerze seryjnym i dacie zakupu. {$serial_number}"]);
+        }
+
+        if ($device->user_id != null) {
+            return back()->with(['error' => 'To urządzenie ma już przypisanego użytkownika.']);
+        }
+
+        $device->user_id = $user_id;
+        $device->save();
+
+        return back()->with('success', 'Pomyślnie przypisano urządzenie do użytkownika.');
+    }
+
+    public function showRepairs(){
+        return view('user.repairs');
     }
 }

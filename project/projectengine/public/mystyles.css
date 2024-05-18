@@ -146,12 +146,12 @@ footer{
   background: linear-gradient(to right, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
 }
 
-.card{
+.card-effect{
   background-color: white;
   transition: 0.5s;
 }
 
-.card:hover{
+.card-effect:hover{
   background-color: #77cdff32;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
   scale: 1.025;

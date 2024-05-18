@@ -71,14 +71,13 @@
         <h2>Dostępne usługi</h2>
         <div class="container d-flex flex-wrap justify-content-center">
             @foreach ($services as $service)
-              <div class="card m-3" style="width: 18rem;">
+              <div class="card card-effect m-3" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{$service -> title}}</h5>
                   <h6 class="card-subtitle mb-2 text-body-secondary">Cena min*: {{$service -> price_min}}</h6>
                   <h6 class="card-subtitle mb-2 text-body-secondary">Cena max*: {{$service -> price_max}}</h6>
                   <p class="card-text">{{$service -> description}}</p>
                   <div class="mt-auto p-2">
-                    <a href="#" class="card-link text-primary">Zobacz więcej.</a>
                   </div>
                 </div>
               </div>
@@ -90,7 +89,7 @@
     </div>
 
     <div class="row justify-content-center align-items-center p-3 custom-row">
-      <div class="col-sm col-md-8 border border-primary p-3 border-radius m-3 custom-container">
+      <div class="col-sm col-md-8 border border-primary p-3 border-radius m-3">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
@@ -103,7 +102,7 @@
         </ul>
         <div class="tab-content p-3 flex-column justify-content-center" id="myTabContent">
           <div class="flex-column tab-pane fade show active justify-content-center" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="d-inline-flex justify-content-center">
+            <div class="d-flex flex-wrap justify-content-center">
               @foreach ($ratings as $rating)
                <div class="card text-bg-primary m-1" style="max-width: 18rem;">
                    <div class="card-header">
