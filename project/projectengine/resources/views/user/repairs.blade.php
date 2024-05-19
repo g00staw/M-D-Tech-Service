@@ -26,7 +26,7 @@
                 <div class="card-body">
                 <h5 class="card-title">Stwórz zgłoszenie do wybranego urządzenia</h5>
                 <p class="card-text">Jeśli twoje urządzenie wymaga serwisu, kliknij przycisk poniżej aby stworzyć nowe zgłoszenie. Wybierz urządzenie oraz opisz problem aby nasi pracownicy mogli pomóc jak najlepiej.</p>
-                <a href="{{route('userdashboard.add.device')}}" class="btn btn-primary">Dodaj zgłoszenie</a>
+                <a href="{{route('userdashboard.add.repair')}}" class="btn btn-primary">Dodaj zgłoszenie</a>
               </div>
           </div>
       <div class="table-responsive m-3">

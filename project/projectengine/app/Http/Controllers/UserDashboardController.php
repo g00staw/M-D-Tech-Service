@@ -80,4 +80,9 @@ class UserDashboardController extends Controller
 
         return view('user.repairs', ['user' => $user, 'repairs' => $repairs]);
     }
+
+    public function showRepairForm(){
+        $devices = auth()->user()->devices;
+        return view('user.addrepair', compact('devices'));
+    }
 }
