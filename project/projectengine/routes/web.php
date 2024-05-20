@@ -31,6 +31,7 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs');
     Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair');
     Route::post('/userdashboard/repair/add', 'addUserRepair')->name('userdashboard.add.repair.store');
+    
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

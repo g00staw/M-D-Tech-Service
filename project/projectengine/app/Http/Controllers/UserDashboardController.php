@@ -82,7 +82,37 @@ class UserDashboardController extends Controller
     }
 
     public function showRepairForm(){
-        $devices = auth()->user()->devices;
+        $devices = auth()->user()->devices->filter(function ($device) {
+            
+            $ongoingRepairs = $device->repairs->where('status', '!=', 'completed');
+            return $ongoingRepairs->isEmpty();
+        });
+    
+        if($devices->isEmpty()){
+            return back()->with('error', 'Nie możesz stworzyć nowego zgłoszenia, ponieważ Twoje urządzenie jest aktualnie w naprawie.');
+        }
+
+        
+    
         return view('user.addrepair', compact('devices'));
+    }
+
+    public function addUserRepair(Request $request){
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $device_id = $request->input('device_id');
+
+        $repair = new Repair;
+        $repair->device_id = $device_id;
+        $repair->user_id = auth()->id();
+        $repair->status = 'pending';
+        $repair->report_date = now();
+        $repair->user_notes = $description;
+        $repair->repair_title = $title;
+        $repair->employee_id = null;
+
+        $repair->save();
+
+        return redirect('/userdashboard/repairs');
     }
 }

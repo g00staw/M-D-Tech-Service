@@ -41,12 +41,12 @@
         <br>
         <div class="mb-3">
             <label for="title" class="form-label">Tytuł zgłoszenia</label>
-            <input class="form-control" id="title" name="title" type="text" placeholder="Np. rozbity ekran" aria-label="titleHelp">
+            <input class="form-control" id="title" name="title" type="text" required placeholder="Np. rozbity ekran" aria-label="titleHelp">
             <div id="titleHelp" class="form-text">Podaj tytuł zgłoszenia, np. "rozbity ekran".</div>
         </div>
         <div class="mb-1">
             <label for="exampleFormControlTextarea1" class="form-label">Opis zgłoszenia</labe>
-            <textarea class="form-control" id="exampleFormControlTextarea1" aria-describedby="dscHelp" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" aria-describedby="dscHelp" rows="3"></textarea>
             <div id="dscHelp" class="form-text">Napisz szczegóły odnośnie zgłoszenia. Np. w jakim stanie znajduje się urządzenie, co się wydarzyło itp.</div>
         </div>
       <button type="submit" class="btn btn-primary">Submit</button>

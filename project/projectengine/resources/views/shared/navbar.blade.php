@@ -29,7 +29,7 @@
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
               <img src="src/responsive.png" height="30">
-              <span class="badge rounded-pill badge-notification bg-info">11</span>
+              {{-- <span class="badge rounded-pill badge-notification bg-info">11</span> --}}
             </div>
             Urządzenia
           </a>
@@ -39,12 +39,12 @@
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
               <img src="src/settings.png" height="30">
-              <span class="badge rounded-pill badge-notification bg-warning">11</span>
+              {{-- <span class="badge rounded-pill badge-notification bg-warning">11</span> --}}
             </div>
             Naprawy
           </a>
         </li>
-        <li class="nav-item text-center mx-2 mx-lg-1 btn">
+        {{-- <li class="nav-item text-center mx-2 mx-lg-1 btn">
           <a class="nav-link" aria-disabled="true" href="">
             <div>
               <i class="far fa-envelope fa-lg mb-1"></i>
@@ -53,7 +53,7 @@
             </div>
             Zgłoszenia
           </a>
-        </li>
+        </li> --}}
       </ul>
       <!-- Left links -->
 
