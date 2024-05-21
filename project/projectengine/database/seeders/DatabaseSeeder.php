@@ -10,6 +10,7 @@ use App\Models\Device;
 use App\Models\Employee;
 use App\Models\Rating;
 use App\Models\Repair;
+use App\Models\Payment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -207,6 +208,57 @@ class DatabaseSeeder extends Seeder
                 'price_max' => '1000.00',
             ],
 
+        ]);
+
+        Payment::insert([
+            [
+                'user_id' => 1,
+                'repair_id' => 1,
+                'amount' => 150.00,
+                'payment_date' => '2024-5-21',
+                'status' => 'completed',
+                'payment_method' => 'credit_card'
+            ],
+            [
+                'user_id' => 1,
+                'repair_id' => 2,
+                'amount' => 200.50,
+                'payment_date' => '2024-5-20',
+                'status' => 'completed',
+                'payment_method' => 'paypal'
+            ],
+            [
+                'user_id' => 1,
+                'repair_id' => 3,
+                'amount' => 75.00,
+                'payment_date' => '2024-5-19',
+                'status' => 'completed',
+                'payment_method' => 'cash'
+            ],
+            [
+                'user_id' => 1,
+                'repair_id' => 4,
+                'amount' => 120.75,
+                'payment_date' => '2024-5-18',
+                'status' => 'completed',
+                'payment_method' => 'credit_card'
+            ],
+            [
+                'user_id' => 1,
+                'repair_id' => 5,
+                'amount' => 99.99,
+                'payment_date' => '2024-5-17',
+                'status' => 'completed',
+                'payment_method' => 'paypal'
+            ],
+            [
+                'user_id' => 1,
+                'repair_id' => 6,
+                'amount' => 130.00,
+                'payment_date' => '2024-5-16',
+                'status' => 'completed',
+                'payment_method' => 'cash'
+            ],
         ]);
 
         

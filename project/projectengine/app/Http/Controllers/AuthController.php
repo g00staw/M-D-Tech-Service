@@ -66,7 +66,7 @@ class AuthController extends Controller
 
         // Spróbuj zalogować się jako admin
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin-dashboard');
+            return redirect()->route('admindashboard');
         }
 
         // Spróbuj zalogować się jako pracownik

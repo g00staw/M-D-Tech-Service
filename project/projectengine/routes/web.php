@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -16,7 +17,7 @@ Route::get('/user-dashboard', function () {
 
 Route::get('/admin-dashboard', function () {
     return view('admin.dashboard');
-})->name('admin-dashboard');
+})->name('admindashboard');
 
 Route::get('/employee-dashboard', function () {
     return view('employee.dashboard');
@@ -32,6 +33,11 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair');
     Route::post('/userdashboard/repair/add', 'addUserRepair')->name('userdashboard.add.repair.store');
     
+});
+
+Route::controller(AdminDashboardController::class)->group(function(){
+    Route::get('/admindashboard', 'showDashboard')->name('admindashboard');
+    Route::get('/admindashboard/employees', 'showEmployees')->name('admindashboard.employees');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
