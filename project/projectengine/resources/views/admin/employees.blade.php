@@ -17,34 +17,36 @@
   @include('shared.navbar')
 
   <div class="container-fluid d-flex flex-column align-items-center m-3">
-    <h1>Twoje urządzenia</h1>
+    <h1>Pracownicy</h1>
     
     <div class="container mt-5 d-flex flex-column">
-      <h1>Employees List</h1>
-      <table class="table table-bordered">
-          <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Imię</th>
-                  <th>E-mail</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              @foreach ($employees as $employee)
-                  <tr>
-                      <td>{{ $employee->id }}</td>
-                      <td>{{ $employee->name }}</td>
-                      <td>{{ $employee->email }}</td>
-                      <td class="d-flex"><a href="#" class="btn btn-primary">Zobacz więcej</a></td>
-                      <td><a href="#" class="btn btn-warning">Edytuj</a></td>
-                      <td><a href="#" class="btn btn-danger">Usuń</a></td>
-                  </tr>
-              @endforeach
-          </tbody>
-      </table>
+      <h2>Lista pracowników</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imię</th>
+                    <th>E-mail</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($employees as $employee)
+                    <tr>
+                        <td>{{ $employee->id }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->email }}</td>
+                        <td><a href="#" class="btn btn-primary btn-sm">Zobacz więcej</a></td>
+                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
+                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
       <!-- Linki do paginacji -->
       {{ $employees->links() }}

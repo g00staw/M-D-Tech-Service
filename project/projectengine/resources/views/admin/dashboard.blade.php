@@ -30,12 +30,19 @@
             </div>
             <div class="text-end pt-1">
               <p class="text-sm mb-0 text-capitalize">Przychody z ostatnich 7 dni</p>
-              <h4 class="mb-0">$53k</h4>
+              <h4 class="mb-0">{{$lastWeekIncome}}</h4>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than lask week</p>
+            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"> 
+              @if ($comparison['percentage_change'] > 0)
+                  +{{ $comparison['percentage_change'] }}%
+              @elseif ($comparison['percentage_change'] < 0)
+                  {{ $comparison['percentage_change'] }}%
+              @else
+                  brak zmiany
+              @endif</span>względem poprzedniego tygodnia.</p>
           </div>
     </div>
     <div class="card w-25 bg-success bg-opacity-25 m-3  custom-card shadow">
@@ -44,43 +51,42 @@
               <i class="material-icons opacity-10"></i>
             </div>
             <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Liczba wszystkich użytkowników</p>
-              <h4 class="mb-0">2,300</h4>
+              <p class="text-sm mb-0 text-capitalize">Liczba wszystkich użytkowników:</p>
+              <h4 class="mb-0">{{$numberOfUsers}}</h4>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
+            
           </div>
     </div>
     <div class="card w-25 bg-warning bg-opacity-25 m-3  custom-card shadow">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-              <i class="material-icons opacity-10">person</i>
+              <i class="material-icons opacity-10"></i>
             </div>
             <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-              <h4 class="mb-0">2,300</h4>
+              <p class="text-sm mb-0 text-capitalize">Liczba wszystkich pracowników:</p>
+              <h4 class="mb-0">{{$numberOfEmployees}}</h4>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
           </div>
     </div>
     <div class="card w-25 bg-danger bg-opacity-25 m-3  custom-card shadow">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-              <i class="material-icons opacity-10">person</i>
+              <i class="material-icons opacity-10"></i>
             </div>
             <div class="text-end pt-1">
-              <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-              <h4 class="mb-0">2,300</h4>
+              <p class="text-sm mb-0 text-capitalize">Liczba aktywnych zgłoszeń:</p>
+              <h4 class="mb-0">{{$numberOfActiveRepairs}}</h4>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3">
-            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than lask month</p>
+           
           </div>
     </div>
       </div>
@@ -105,7 +111,7 @@
             <h5 class="card-title">Pracownicy</h5>
             <h6 class="card-subtitle mb-2 text-muted">Dashboard do zarządzania pracownikami</h6>
             <p class="card-text">Zobacz podsumowanie pracowników, zarządzaj pracownikami.</p>
-            <a href="#" class="btn btn-primary">Przejdź</a>
+            <a href="{{ route('admindashboard.employees') }}" class="btn btn-primary">Przejdź</a>
           </div>
         </div>
         <div class="card m-3 custom-card shadow" style="width: 18rem;">

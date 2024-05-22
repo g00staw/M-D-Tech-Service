@@ -45,4 +45,47 @@ class Payment extends Model
             'data' => $data,
         ];
     }
+
+    public static function revenueLast7Days()
+    {
+        $last7Days = Carbon::now()->subDays(7);
+
+        return self::where('status', 'completed')
+            ->where('payment_date', '>=', $last7Days)
+            ->sum('amount');
+    }
+
+    /**
+     * Compare the revenue from the last 7 days with the revenue from the previous 2 weeks.
+     *
+     * @return array
+     */
+    public static function compareRevenueLast7DaysWithPrevious2Weeks()
+    {
+        $last7Days = Carbon::now()->subDays(7);
+        $previous14DaysStart = Carbon::now()->subDays(21);
+        $previous14DaysEnd = Carbon::now()->subDays(8);
+
+        $revenueLast7Days = self::where('status', 'completed')
+            ->where('payment_date', '>=', $last7Days)
+            ->sum('amount');
+
+        $revenuePrevious2Weeks = self::where('status', 'completed')
+            ->whereBetween('payment_date', [$previous14DaysStart, $previous14DaysEnd])
+            ->sum('amount');
+
+        $difference = $revenueLast7Days - $revenuePrevious2Weeks;
+        $percentageChange = $revenuePrevious2Weeks != 0
+            ? ($difference / $revenuePrevious2Weeks) * 100
+            : ($revenueLast7Days > 0 ? 100 : 0);
+
+        return [
+            'revenue_last_7_days' => $revenueLast7Days,
+            'revenue_previous_2_weeks' => $revenuePrevious2Weeks,
+            'difference' => $difference,
+            'percentage_change' => $percentageChange
+        ];
+    }
+
+   
 }

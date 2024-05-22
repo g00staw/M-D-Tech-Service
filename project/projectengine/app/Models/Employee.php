@@ -45,4 +45,15 @@ class Employee extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function countEmployees(){
+        return self::count();
+    }
+
+    public function showActiveRepairsCount($employeeId)
+    {
+        $employee = Employee::findOrFail($employeeId);
+        $activeRepairsCount = $employee->countActiveRepairs();
+        return $activeRepairsCount;
+    }
 }

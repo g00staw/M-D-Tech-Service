@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->hasMany(Repair::class);
     }
 
+    public static function countUsers()
+    {
+        return self::count();
+    }
+
 
 
 }

@@ -30,4 +30,10 @@ class Repair extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+    public static function countNonCompletedRepairs()
+    {
+        return self::where('status', '<>', 'ukończono')->count();
+    }
+
 }
