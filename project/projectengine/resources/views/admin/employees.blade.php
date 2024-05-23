@@ -22,15 +22,18 @@
     <div class="container mt-5 d-flex flex-column">
       <h2>Lista pracowników</h2>
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Imię</th>
                     <th>E-mail</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Ilość przypisanych napraw</th>
+                    <th>Il. ukoń. napraw w ciągu 7 dni</th>
+                    <th style="width: 10rem;"></th>
+                    <th style="width: 9rem;"></th>
+                    <th style="width: 7rem;"></th>
+                    <th style="width: 7rem;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -39,9 +42,12 @@
                         <td>{{ $employee->id }}</td>
                         <td>{{ $employee->name }}</td>
                         <td>{{ $employee->email }}</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">Zobacz więcej</a></td>
-                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                        <td>{{ $employee->activeRepairsCount }}</td>
+                        <td>{{ $employee->completedRepairsThisWeek }}</td>
+                        <td><a href="#" class="btn text-center d-flex btn-primary btn-sm">Przypisz zgłoszenie</a></td>
+                        <td><a href=" {{ route('admindashboard.employeeinfo', ['id' => $employee->id]) }} " class="btn text-center d-flex btn-primary btn-sm">Zobacz więcej</a></td>
+                        <td><a href="#" class="btn text-center d-flex btn-warning btn-sm">Edytuj</a></td>
+                        <td><a href="#" class="btn text-center d-flex btn-danger btn-sm">Usuń</a></td>
                     </tr>
                 @endforeach
             </tbody>

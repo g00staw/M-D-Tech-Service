@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Database\Factories\EmployeeFactory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Models\Employee;
@@ -34,6 +35,17 @@ class AdminDashboardController extends Controller
 
     public function showEmployees(){
         $employees = Employee::paginate(10);
+        foreach ($employees as $employee) {
+            $employee->activeRepairsCount = Employee::showActiveRepairsCount($employee->id);
+            $employee->completedRepairsThisWeek = Employee::showCompletedRepairs($employee->id, 7);
+        }
         return view('admin.employees', ['employees' => $employees]);
     }
+
+    public function employeeinfo($id){
+        $employee = Employee::findOrFail($id);
+
+        return view('admin.employee', ['employee' => $employee]);
+    }
+    
 }

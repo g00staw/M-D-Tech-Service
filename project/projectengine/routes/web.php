@@ -38,6 +38,7 @@ Route::controller(UserDashboardController::class)->group(function(){
 Route::controller(AdminDashboardController::class)->group(function(){
     Route::get('/admindashboard', 'showDashboard')->name('admindashboard');
     Route::get('/admindashboard/employees', 'showEmployees')->name('admindashboard.employees');
+    Route::get('/admindashboard/employee/{id}', 'employeeinfo')->name('admindashboard.employeeinfo');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

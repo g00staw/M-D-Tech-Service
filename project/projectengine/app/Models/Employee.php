@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Repair;
+use Illuminate\Support\Carbon;
 
 class Employee extends Authenticatable
 {
@@ -46,14 +48,33 @@ class Employee extends Authenticatable
         ];
     }
 
+    public function repairs()
+    {
+        return $this->hasMany(Repair::class);
+    }
+
     public static function countEmployees(){
         return self::count();
     }
 
-    public function showActiveRepairsCount($employeeId)
+    public static function showActiveRepairsCount($employeeId)
     {
         $employee = Employee::findOrFail($employeeId);
-        $activeRepairsCount = $employee->countActiveRepairs();
+        $activeRepairsCount = $employee->repairs()->where('status', '<>', 'ukończono')->count();
         return $activeRepairsCount;
+    }
+
+    public static function showCompletedRepairs($employeeId, $endDate)
+    {
+        $date = Carbon::now()->subDays($endDate);
+        
+        $employee = Employee::findOrFail($employeeId);
+
+        $completedRepairs = $employee->repairs()
+            ->where('status', '=', 'ukończono')
+            ->where('completion_date', '>', Carbon::now())  // Zmień na swoją datę
+            ->count();
+
+        return $completedRepairs;
     }
 }
