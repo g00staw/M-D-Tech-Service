@@ -45,6 +45,8 @@ class AdminDashboardController extends Controller
     public function employeeinfo($id){
         $employee = Employee::findOrFail($id);
 
+        
+
         return view('admin.employee', ['employee' => $employee]);
     }
     
