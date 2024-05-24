@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Techservice;
 use Database\Factories\EmployeeFactory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
@@ -106,44 +107,40 @@ class AdminDashboardController extends Controller
         return redirect()->route('admindashboard.employees')->with('success', 'Pomyślnie przypisano pracownika do naprawy.');
     }
 
-    public function fireEmployee(Request $request)
-    {
-        $request->validate([
-            'employee_id' => 'required|numeric|min:0',
-        ]);
-
-
-
-        $repairs = Repair::where('status', '!=', 'ukończono')
-            ->whereNull('employee_id');
-
-        if ($repairs != null) {
-            return back()->with('warning', 'Nie można zwolnić pracownika z aktywnymi naprawami.');
-        }
-
-        $employee = Employee::findOrFail($request->input('id'));
-
-        $employee->delete();
-
-        return back()->with('success', 'Pomyślnie zwolniono pracownika, jego konto zostało usunięte.');
-    }
 
     public function deleteEmployee(Request $request, $id)
     {
-        $user = auth()->user();
+        // Sprawdzenie, czy użytkownik jest zalogowany jako admin
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
+        }
+
+        // Walidacja hasła
         $request->validate([
             'password' => 'required|string',
         ]);
 
-        if (!Hash::check($request->input('password'), Auth::user()->password)) {
+        // Sprawdzenie hasła admina
+        if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
         }
 
+        // Znajdź pracownika po ID
         $employee = Employee::findOrFail($id);
+
+        // Usuń pracownika
         $employee->delete();
 
+        // Przekieruj z komunikatem sukcesu
         return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie usunięty.');
     }
+
+    public function displayServices(){
+        $techservices = Techservice::paginate(10, ['*'], 'services_page');
+
+        return view('admin.services', ['services' => $techservices]);
+    }
+
 
 
 }
