@@ -17,6 +17,6 @@ class EmployeesTableSeeder extends Seeder
             'name' => 'employee Test',
             'email' => 'emp@emp.com',
             'password' => '1234',
-        ]);;
+        ]);
     }
 }

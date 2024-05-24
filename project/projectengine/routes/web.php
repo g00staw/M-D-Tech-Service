@@ -39,6 +39,9 @@ Route::controller(AdminDashboardController::class)->group(function(){
     Route::get('/admindashboard', 'showDashboard')->name('admindashboard');
     Route::get('/admindashboard/employees', 'showEmployees')->name('admindashboard.employees');
     Route::get('/admindashboard/employee/{id}', 'employeeinfo')->name('admindashboard.employeeinfo');
+    Route::post('/admindashboard/employee/{id}', 'updateEmployeeSalary')->name('admindashboard.employee.updatesalary');
+    Route::post('/admindashboard/employees', 'assignRepairToEmployee')->name('admindashboard.employees.assignRepairToEmployee');
+    Route::delete('/admindashboard/employee/{id}', 'AdminDashboardController@deleteEmployee')->name('admindashboard.employee.delete');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

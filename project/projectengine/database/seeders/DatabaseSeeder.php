@@ -24,19 +24,17 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            [
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-                'password' => '1234',
-            ],
-            
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => '1234',
+
         ]);
 
         Admin::factory()->create([
             'name' => 'Admin Test',
             'email' => 'admin@admin.com',
             'password' => '1234',
-        ]);;
+        ]);
 
         Device::insert([
             [
@@ -57,14 +55,31 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => null,
             ],
+            [
+                'brand' => 'iPhone',
+                'model' => '15 Pro',
+                'serial_number' => '1912012942',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2026-05-07',
+                'type' => 'smartphone',
+                'user_id' => 1,
+            ],
 
         ]);
 
         Employee::factory()->create([
             'name' => 'employee Test',
             'email' => 'emp@emp.com',
-            'password' => '1234',
-        ]);;
+            'password' => bcrypt('1234'), 
+            'salary' => 4250,
+        ]);
+
+        Employee::factory()->create([
+            'name' => 'Zbigniew Kucharski',
+            'email' => 'zbg.kucharski@gmail.com',
+            'password' => bcrypt('1234'), 
+            'salary' => 3750,
+        ]);
 
         Repair::insert([
             [
@@ -114,7 +129,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'device_id' => '1',
-                'employee_id' => '1',
+                'employee_id' => null,
                 'user_id' => '1',
                 'report_date' => '2024-5-15', // poprawny format!
                 'user_notes' => 'Rozbity ekran',
@@ -264,6 +279,6 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        
+
     }
 }
