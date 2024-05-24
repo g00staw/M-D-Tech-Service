@@ -43,6 +43,7 @@ Route::controller(AdminDashboardController::class)->group(function(){
     Route::post('/admindashboard/employees', 'assignRepairToEmployee')->name('admindashboard.employees.assignRepairToEmployee');
     Route::delete('/admindashboard/employee/{id}', 'deleteEmployee')->name('admindashboard.employee.delete');
     Route::get('/admindashboard/services', 'displayServices')->name('admindashboard.services');
+    Route::post('/admindashboard/services', 'editService')->name('admindashboard.edit.service');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

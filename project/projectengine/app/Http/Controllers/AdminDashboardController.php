@@ -110,35 +110,34 @@ class AdminDashboardController extends Controller
 
     public function deleteEmployee(Request $request, $id)
     {
-        // Sprawdzenie, czy użytkownik jest zalogowany jako admin
+
         if (!Auth::guard('admin')->check()) {
             return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
         }
 
-        // Walidacja hasła
         $request->validate([
             'password' => 'required|string',
         ]);
 
-        // Sprawdzenie hasła admina
         if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
         }
 
-        // Znajdź pracownika po ID
         $employee = Employee::findOrFail($id);
-
-        // Usuń pracownika
         $employee->delete();
 
-        // Przekieruj z komunikatem sukcesu
         return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie usunięty.');
     }
 
     public function displayServices(){
         $techservices = Techservice::paginate(10, ['*'], 'services_page');
 
+
         return view('admin.services', ['services' => $techservices]);
+    }
+
+    public function editService(Request $request){
+        
     }
 
 
