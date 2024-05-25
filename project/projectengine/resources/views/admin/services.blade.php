@@ -18,6 +18,18 @@
 
   <div class="container-fluid d-flex flex-column align-items-center m-3 justify-content-center">
     <h1>Usługi</h1>
+
+    @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
     <div class="container mt-5 d-flex flex-wrap border border-radius">
       @foreach ($services as $service)
     <div class="card card-effect m-3" style="width: 18rem;">
@@ -45,45 +57,41 @@
     <div class="container mt-5 d-flex flex-column  border border-radius">
       <h2>Edytuj usługę</h2>
       <form id="deviceForm" method="POST" action="{{ route('admindashboard.edit.service') }}">
-        @csrf
-        <div class="mb-3">
-          <label for="service">Wybierz usługę:</label>
-          <select id="service" name="service_id" class="form-control" onchange="fillForm()">
+    @csrf
+    <div class="mb-3">
+        <label for="service">Wybierz usługę:</label>
+        <select id="service" name="service_id" class="form-control" onchange="fillForm()">
             @foreach($services as $service)
-        <option value="{{ $service->id }}" data-title="{{ $service->title }}"
-        data-min-price="{{ $service->price_min }}" data-max-price="{{ $service->price_max }}"
-        data-description="{{ $service->description }}">{{ $service->title }}</option>
-      @endforeach
-          </select>
-          <br>
-          <div class="mb-3">
+                <option value="{{ $service->id }}" data-title="{{ $service->title }}"
+                data-min-price="{{ $service->price_min }}" data-max-price="{{ $service->price_max }}"
+                data-description="{{ $service->description }}">{{ $service->title }}</option>
+            @endforeach
+        </select>
+        <br>
+        <div class="mb-3">
             <label for="title" class="form-label">Tytuł usługi</label>
-            <input class="form-control" id="title" name="title" type="text" required placeholder="Np. rozbity ekran"
-              aria-label="titleHelp">
+            <input class="form-control" id="title" name="title" type="text" required placeholder="Np. rozbity ekran" aria-label="titleHelp">
             <div id="titleHelp" class="form-text">Podaj tytuł usługi, np. "Wymiana ekranu w smartfonie".</div>
-          </div>
-          <div class="mb-3">
-            <label for="cenmin" class="form-label">Cena min. usługi</label>
-            <input class="form-control" id="cenmin" name="min_price" type="number" required
-              placeholder="100" aria-label="titleHelp">
-            <div id="titleHelp" class="form-text">Podaj cenę minimalną usługi".</div>
-          </div>
-          <div class="mb-3">
-            <label for="cenmax" class="form-label">Cena maks. usługi</label>
-            <input class="form-control" id="cenmax" name="max_price" type="number" required
-              placeholder="200" aria-label="titleHelp">
-            <div id="titleHelp" class="form-text">Podaj cenę maksymalną usługi.</div>
-          </div>
-          <div class="mb-1">
-            <label for="exampleFormControlTextarea1" class="form-label">Opis usługi</labe>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="description"
-                aria-describedby="dscHelp" rows="3"></textarea>
-              <div id="dscHelp" class="form-text">Napisz szczegóły odnośnie zgłoszenia. Np. w jakim stanie znajduje się
-                urządzenie, co się wydarzyło itp.</div>
-          </div>
-          <button type="submit" class="btn btn-primary">Zatwierdź zmiany</button>
         </div>
-      </form>
+        <div class="mb-3">
+            <label for="cenmin" class="form-label">Cena min. usługi</label>
+            <input class="form-control" id="cenmin" name="min_price" type="number" step="0.01" required placeholder="100" aria-label="titleHelp">
+            <div id="titleHelp" class="form-text">Podaj cenę minimalną usługi.</div>
+        </div>
+        <div class="mb-3">
+            <label for="cenmax" class="form-label">Cena maks. usługi</label>
+            <input class="form-control" id="cenmax" name="max_price" type="number" step="0.01" required placeholder="200" aria-label="titleHelp">
+            <div id="titleHelp" class="form-text">Podaj cenę maksymalną usługi.</div>
+        </div>
+        <div class="mb-1">
+            <label for="exampleFormControlTextarea1" class="form-label">Opis usługi</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" aria-describedby="dscHelp" rows="3"></textarea>
+            <div id="dscHelp" class="form-text">Napisz opis odnośnie usługi. Na czym polega, o ile zostanie odnowiona gwarancja itp.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Zatwierdź zmiany</button>
+    </div>
+    </form>
+    </div>
 
       <script>
         function fillForm() {
@@ -91,8 +99,8 @@
           var selectedOption = select.options[select.selectedIndex];
 
           document.getElementById('title').value = selectedOption.getAttribute('data-title');
-          document.getElementById('cenmin').value = selectedOption.getAttribute('data-price-min');
-          document.getElementById('cenmax').value = selectedOption.getAttribute('data-price-max');
+          document.getElementById('cenmin').value = selectedOption.getAttribute('data-min-price');
+          document.getElementById('cenmax').value = selectedOption.getAttribute('data-max-price');
           document.getElementById('exampleFormControlTextarea1').value = selectedOption.getAttribute('data-description');
         }
       </script>

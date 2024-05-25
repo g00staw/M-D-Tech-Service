@@ -129,15 +129,112 @@ class AdminDashboardController extends Controller
         return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie usunięty.');
     }
 
-    public function displayServices(){
+    public function displayServices()
+    {
         $techservices = Techservice::paginate(10, ['*'], 'services_page');
 
 
         return view('admin.services', ['services' => $techservices]);
     }
 
-    public function editService(Request $request){
-        
+    public function editService(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'min_price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'max_price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'required|string|max:255'
+        ]);
+
+        $techservice = Techservice::findOrFail($request->input('service_id'));
+
+        if ($request->input('min_price') > $request->input('max_price')) {
+            return back()->with('warning', 'Cena minimalna nie może być większa od maksymalnej.');
+        }
+
+        $techservice->title = $request->input('title');
+        $techservice->price_min = $request->input('min_price');
+        $techservice->price_max = $request->input('max_price');
+        $techservice->description = $request->input('description');
+
+        $techservice->save();
+
+        return back()->with('success', 'Pomyślnie zmodyfikowano usługę.');
+    }
+
+    public function showFormService()
+    {
+        return view('admin.addservice');
+    }
+
+    public function addService(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'min_price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'max_price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'required|string|max:255'
+        ]);
+
+        if ($request->input('min_price') > $request->input('max_price')) {
+            return back()->with('warning', 'Cena minimalna nie może być większa od maksymalnej.');
+        }
+
+
+        $techservice = new Techservice();
+        $techservice->title = $request->input('title');
+        $techservice->price_min = $request->input('min_price');
+        $techservice->price_max = $request->input('max_price');
+        $techservice->description = $request->input('description');
+
+        $techservice->save();
+
+        return redirect()->route('admindashboard.services')->with('success', 'Dodano usługę.');
+    }
+
+    public function showRemoveFormService()
+    {
+        $techservices = Techservice::all();
+
+
+        return view('admin.removeservice', ['services' => $techservices]);
+    }
+
+    public function removeService(Request $request)
+    {
+
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
+        }
+
+        $techservice = Techservice::findOrFail($request->input('service_id'));
+        $techservice->delete();
+
+        return redirect()->route('admindashboard.services')->with('success', 'Usunięto usługę.');
+    }
+
+    public function addEmployeeForm()
+    {
+        return view('admin.addemployee');
+    }
+
+    public function addEmployee(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:employees',
+            'password' => 'required|string|min:6|confirmed',
+            'salary' => 'required|integer|min:0'
+        ]);
+
+        Employee::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'salary' => $request->input('salary'),
+        ]);
+
+        return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został dodany.');
     }
 
 
