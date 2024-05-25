@@ -234,7 +234,53 @@ class AdminDashboardController extends Controller
             'salary' => $request->input('salary'),
         ]);
 
-        return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został dodany.');
+        return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie dodany.');
+    }
+    public function showDevices()
+    {
+        $devices = Device::paginate(10, ['*'], 'device_page');
+
+        return view('admin.devices', ['devices' => $devices]);
+    }
+
+    public function deleteDevice(Request $request)
+    {
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
+        }
+
+
+        $request->validate([
+            'password' => 'required|string',
+        ]);
+
+        if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
+            return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
+        }
+
+        $activeRepair = Repair::where('device_id', $request->input('device_id'))->where('status', '!=', 'ukończono')->first();
+        if ($activeRepair) {
+            return redirect()->back()->withErrors(['device' => 'Urządzenie jest aktualnie naprawiane i nie może być usunięte.']);
+        }
+
+        $device = Device::findOrFail($request->input('device_id'));
+        $device->delete();
+
+        return redirect()->route('admindashboard.devices')->with('success', 'Urządzenie zostało pomyślnie usunięte.');
+    }
+
+    public function showRepairs()
+    {
+        $repairs = Repair::paginate(10, ['*'], 'repair_page');
+
+        return view('admin.repairs', ['repairs' => $repairs]);
+    }
+
+    public function showUsers()
+    {
+        $users = User::paginate(10, ['*'], 'user');
+
+        return view('admin.repairs', ['users' => $users]);
     }
 
 

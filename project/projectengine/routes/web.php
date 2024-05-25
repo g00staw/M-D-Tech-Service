@@ -50,6 +50,9 @@ Route::controller(AdminDashboardController::class)->group(function(){
     Route::delete('/admindashboard/service/remove', 'removeService')->name('admindashboard.remove.service');
     Route::get('/admindashboard/add/employee', 'addEmployeeForm')->name('admindashboard.employee.addForm');
     Route::post('/admindashboard/add/employee', 'addEmployee')->name('admindashboard.add.employee');
+    Route::get('/admindashboard/devices', 'showDevices')->name('admindashboard.devices');
+    Route::delete('/admindashboard/devices', 'deleteDevice')->name('admindashboard.device.delete');
+    Route::get('/admindashboard/repairs', 'showRepairs')->name('admindashboard.repairs');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
