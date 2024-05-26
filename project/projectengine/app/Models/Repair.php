@@ -35,5 +35,9 @@ class Repair extends Model
     {
         return self::where('status', '<>', 'ukończono')->count();
     }
+    public static function countReportedRepairs()
+    {
+        return self::where('status', '<>', 'zgłoszono')->count();
+    }
 
 }

@@ -110,25 +110,30 @@ class AdminDashboardController extends Controller
 
     public function deleteEmployee(Request $request, $id)
     {
-
         if (!Auth::guard('admin')->check()) {
             return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
         }
-
+    
         $request->validate([
             'password' => 'required|string',
         ]);
-
+    
         if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
         }
-
+    
+        // Sprawdź, czy pracownik nie jest aktualnie zaangażowany w naprawę
+        $activeRepair = Repair::where('employee_id', $id)->where('status', '!=', 'ukończono')->first();
+        if ($activeRepair) {
+            return back()->with(['error' => 'Pracownik jest aktualnie zaangażowany w naprawę i nie może być usunięty.']);
+        }
+    
         $employee = Employee::findOrFail($id);
         $employee->delete();
-
+    
         return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie usunięty.');
     }
-
+    
     public function displayServices()
     {
         $techservices = Techservice::paginate(10, ['*'], 'services_page');
@@ -281,6 +286,34 @@ class AdminDashboardController extends Controller
         $users = User::paginate(10, ['*'], 'user');
 
         return view('admin.repairs', ['users' => $users]);
+    }
+
+    public function showFinanse()
+    {
+        $payments = Payment::paginate(10, ['*'], 'payment_page');
+
+        $revenueLast7Days = Payment::revenueLast7Days();
+        $revenueComparison = Payment::compareRevenueLast7DaysWithPrevious2Weeks();
+
+        $data = Payment::getIncomeForLast7Days();
+        $hasData = !empty(array_filter($data['data']));
+
+        $revenueLast30Days = Payment::revenueLast30Days();
+
+        $data2 = Payment::getIncomeForLast30Days();
+        $hasData2 = !empty(array_filter($data2['data2']));
+
+
+
+
+        return view('admin.finanse', ['payments' => $payments, 
+                'data' => $data,
+                'data2' => $data2,
+                'hasData' => $hasData,
+                'hasData2' => $hasData2,
+                'lastWeekIncome' => $revenueLast7Days,
+                'comparison' => $revenueComparison,
+                'lastMonthIncome' => $revenueLast30Days,]);
     }
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\EmployeeDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\UserDashboardController;
 
 // Strona główna
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.selectlogin');
 });
 
 Route::get('/user-dashboard', function () {
@@ -20,8 +21,8 @@ Route::get('/admin-dashboard', function () {
 })->name('admindashboard');
 
 Route::get('/employee-dashboard', function () {
-    return view('employee.dashboard');
-})->name('employee-dashboard');
+    return view('employee.dashboard');  
+})->name('employeedashboard');
 
 Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices');
@@ -53,6 +54,13 @@ Route::controller(AdminDashboardController::class)->group(function(){
     Route::get('/admindashboard/devices', 'showDevices')->name('admindashboard.devices');
     Route::delete('/admindashboard/devices', 'deleteDevice')->name('admindashboard.device.delete');
     Route::get('/admindashboard/repairs', 'showRepairs')->name('admindashboard.repairs');
+    Route::get('/admindashboard/finanse', 'showFinanse')->name('admindashboard.finanse');
+});
+
+Route::controller(EmployeeDashboardController::class)->group(function(){
+    Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard');
+    Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee');
+    Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

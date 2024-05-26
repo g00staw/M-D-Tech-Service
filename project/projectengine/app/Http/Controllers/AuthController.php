@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         // Spróbuj zalogować się jako pracownik
         if (Auth::guard('employee')->attempt($credentials)) {
-            return redirect()->route('employee-dashboard');
+            return redirect()->route('employeedashboard');
         }
 
         // Spróbuj zalogować się jako użytkownik

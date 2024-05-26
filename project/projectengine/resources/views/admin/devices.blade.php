@@ -35,50 +35,23 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="m-3">Typ urządzenia</th>
-                            <th class="m-3">Marka</th>
-                            <th class="m-3">Model</th>
-                            <th class="m-3">Numer seryjny</th>
-                            <th class="m-3">Data zakupu</th>
-                            <th class="m-3">Koniec gwarancji</th>
-                            <th class="m-3">Nazwa właściciela</th>
-                            <th></th>
+                            <th class="m-3">ID płatności</th>
+                            <th class="m-3">Użytkownik</th>
+                            <th class="m-3">ID naprawy</th>
+                            <th class="m-3">Nazwa naprawy</th>
+                            <th class="m-3">Metoda płatności</th>
+                            <th class="m-3">Data płatności</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($devices as $device)
+                        @foreach ($payments as $payment)
                             <tr>
-                                <td>{{ $device->type }}</td>
-                                <td>{{ $device->brand }}</td>
-                                <td>{{ $device->model }}</td>
-                                <td>{{ $device->serial_number }}</td>
-                                <td>{{ $device->purchase_date }}</td>
-                                <td>{{ $device->end_of_warranty }}</td>
-                                <td>{{ $device->user->name }}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger dropdown-toggle m-1"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Usuń urządzenie
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <form
-                                                action="{{ route('admindashboard.device.delete', ['id' => $device->id]) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Czy na pewno chcesz usunąć to urządzenie?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                                <label for="password" class="m-2 text-danger">Podaj swoje hasło w celu
-                                                    potwierdzenia:</label><br>
-                                                <input type="password" class="m-2 rounded" id="password" name="password"
-                                                    required><br>
-                                                <div class="dropdown-divider"></div>
-                                                <button type="submit" class="btn m-2 btn-danger">Usuń</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td>{{ $payment->id }}</td>
+                                <td>{{ $payment->user->name }}</td>
+                                <td>{{ $payment->repair_id }}</td>
+                                <td>{{ $payment->repair->repair_title }}</td>
+                                <td>{{ $payment->payment_method }}</td>
+                                <td>{{ $payment->payment_date }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -86,9 +59,9 @@
             </div>
             <div class="container mt-5">
                 <ul class="pagination pagination-sm justify-content-center">
-                    @for ($i = 1; $i <= $devices->lastPage(); $i++)
-                        <li class="page-item {{ ($devices->currentPage() == $i) ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $devices->url($i) }}">{{ $i }}</a>
+                    @for ($i = 1; $i <= $payments->lastPage(); $i++)
+                        <li class="page-item {{ ($payments->currentPage() == $i) ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $payments->url($i) }}">{{ $i }}</a>
                         </li>
                     @endfor
                 </ul>
