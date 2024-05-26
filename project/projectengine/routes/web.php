@@ -61,6 +61,7 @@ Route::controller(EmployeeDashboardController::class)->group(function(){
     Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard');
     Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee');
     Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair');
+    Route::post('/employeedashboard/repair/{id}', 'addRepairNote')->name('employeedashboard.addRepairNote');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
