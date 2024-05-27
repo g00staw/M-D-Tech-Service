@@ -63,15 +63,23 @@ Route::controller(AdminDashboardController::class)->group(function(){
     Route::delete('/admindashboard/devices', 'deleteDevice')->name('admindashboard.device.delete')->middleware('admin');
     Route::get('/admindashboard/repairs', 'showRepairs')->name('admindashboard.repairs')->middleware('admin');
     Route::get('/admindashboard/finanse', 'showFinanse')->name('admindashboard.finanse')->middleware('admin');
+    Route::get('/admindashboard/profile', 'showProfile')->name('admindashboard.profile')->middleware('admin');
+    Route::post('/admindashboard/profile/change-password', 'updatePassword')->name('admindashboard.profile.psschange')->middleware('admin');
+    Route::post('/admindashboard/profile/change-email', 'updateEmail')->name('admindashboard.profile.emchange')->middleware('admin');
+    Route::post('/admindashboard/profile/change-photo', 'updatePhoto')->name('admindashboard.profile.phchange')->middleware('admin');
 });
 
 Route::controller(EmployeeDashboardController::class)->group(function(){
     Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard')->middleware('employee');
-    Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee')->middleware('admin');
-    Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair')->middleware('admin');
-    Route::post('/employeedashboard/repair/{id}/change-status', 'changeRepairStatus')->name('employeedashboard.repair.changeStatus')->middleware('admin');
-    Route::post('/employeedashboard/repair/{id}/add-note', 'addRepairNote')->name('employeedashboard.repair.addRepairNote')->middleware('admin');
-    Route::post('/employeedashboard/repair/{id}/add-payment', 'addNewPayment')->name('employeedashboard.repair.addNewPayment')->middleware('admin');
+    Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee')->middleware('employee');
+    Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair')->middleware('employee');
+    Route::post('/employeedashboard/repair/{id}/change-status', 'changeRepairStatus')->name('employeedashboard.repair.changeStatus')->middleware('employee');
+    Route::post('/employeedashboard/repair/{id}/add-note', 'addRepairNote')->name('employeedashboard.repair.addRepairNote')->middleware('employee');
+    Route::post('/employeedashboard/repair/{id}/add-payment', 'addNewPayment')->name('employeedashboard.repair.addNewPayment')->middleware('employee');
+    Route::get('/employeedashboard/profile', 'showProfile')->name('employeedashboard.profile')->middleware('employee');
+    Route::post('/employeedashboard/profile/change-password', 'updatePassword')->name('employeedashboard.profile.psschange')->middleware('employee');
+    Route::post('/employeedashboard/profile/change-email', 'updateEmail')->name('employeedashboard.profile.emchange')->middleware('employee');
+    Route::post('/employeedashboard/profile/change-photo', 'updatePhoto')->name('employeedashboard.profile.phchange')->middleware('employee');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

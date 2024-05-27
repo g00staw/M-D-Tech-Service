@@ -17,10 +17,10 @@
   @include('shared.navbar')
 
   <div class="container-fluid ">
-    <div class="container d-flex flex-column justify-content-center p-3">
+    <div class="container d-flex flex-column justify-content-center ">
       <h2>Pulpit</h2>
-      <div class="container d-flex justify-content-center">
-        <div class="card w-25 bg-success bg-opacity-25 m-3  custom-card shadow">
+      <div class="container d-flex justify-content-center flex-wrap">
+        <div class="card bg-success bg-opacity-25 m-3  custom-card shadow" style="witdh:18rem;">
           <div class="card-header p-3 pt-2">
             <div
               class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
@@ -35,7 +35,7 @@
           <div class="card-footer p-3">
           </div>
         </div>
-        <div class="card w-25 bg-primary bg-opacity-25 m-3  custom-card shadow">
+        <div class="card bg-primary bg-opacity-25 m-3  custom-card shadow" style="witdh:18rem;">
           <div class="card-header p-3 pt-2">
             <div
               class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
@@ -50,7 +50,7 @@
           <div class="card-footer p-3">
           </div>
         </div>
-        <div class="card w-25 bg-danger bg-opacity-25 m-3  custom-card shadow">
+        <div class="card bg-danger bg-opacity-25 m-3  custom-card shadow" style="witdh:18rem;">
           <div class="card-header p-3 pt-2">
             <div
               class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">

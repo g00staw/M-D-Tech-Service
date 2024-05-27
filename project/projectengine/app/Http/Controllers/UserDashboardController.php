@@ -153,18 +153,16 @@ class UserDashboardController extends Controller
         return view('user.showrepair', ['repair' => $repair, 'notes' => $notes, 'device' => $device, 'payment' => $payment]);
     }
 
-    public function payForRepair(Request $request)
+    public function payForRepair(Request $request, $id)
     {
         $request->validate([
             'repair_id' => 'required|exists:repairs,id',
-            'amount' => 'required|numeric|min:0',
             'payment_method' => 'required|in:credit_card,paypal,cash',
         ]);
 
-        $payment = new Payment;
+        $payment = Payment::findOrFail($id);
         $payment->user_id = auth()->id();
         $payment->repair_id = $request->repair_id;
-        $payment->amount = $request->amount;
         $payment->payment_date = now();
         $payment->status = 'completed';
         $payment->payment_method = $request->payment_method;

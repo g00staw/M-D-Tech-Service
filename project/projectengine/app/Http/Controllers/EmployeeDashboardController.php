@@ -9,6 +9,7 @@ use App\Models\Repair;
 use App\Models\Device;
 use App\Models\Employee;
 use App\Models\Payment;
+use App\Models\Admin;
 use Laravel\Ui\AuthCommand;
 use App\Models\Rating;
 use App\Models\RepairNote;
@@ -139,7 +140,69 @@ class EmployeeDashboardController extends Controller
     }
 
 
+    public function showProfile(Request $request)
+    {
+        return view('employee.profile');
+    }
 
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user =  Auth::guard('employee')->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Obecne hasło jest nieprawidłowe']);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with('success', 'Hasło zostało pomyślnie zmienione');
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+        if (
+            User::where('email', $request->email)->exists() ||
+            Admin::where('email', $request->email)->exists() ||
+            Employee::where('email', $request->email)->exists()
+        ) {
+            return redirect()->route('employeedashboard.profile')->with('error', 'Email jest w użyciu.');
+        }
+
+
+        $user =  Auth::guard('employee')->user();
+        $user->email = $request->email;
+        $user->save();
+
+        return back()->with('success', 'E-mail został pomyślnie zmieniony');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $request->validate([
+            'profile_photo' => ['nullable', 'image'],
+        ]);
+
+        $user =  Auth::guard('employee')->user();
+
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile_photos', 'public');
+            $user->profile_photo = $path;
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profil został pomyślnie zaktualizowany');
+    }
 
 
 

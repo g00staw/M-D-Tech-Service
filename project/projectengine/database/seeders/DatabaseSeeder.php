@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => null,
             ],
-            /* [
+             [
                 'brand' => 'iPhone',
                 'model' => '15 Pro',
                 'serial_number' => '1912012942',
@@ -67,7 +67,17 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => 1,
             ],
- */
+            [
+                'brand' => 'Samsung',
+                'model' => 'S24',
+                'serial_number' => '1963412942',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2026-05-07',
+                'is_registered' => false,
+                'type' => 'smartphone',
+                'user_id' => 1,
+            ],
+ 
         ]);
 
         Employee::factory()->create([

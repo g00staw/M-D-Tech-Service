@@ -63,8 +63,8 @@
             <div class="container d-flex flex-column align-items-center border border-radius p-3">
                 <hr>
                 <h2>Opłać naprawę:</h2>
-                @if($repair->status == 'ukończono')
-                    <form method="POST" action="{{ route('userdashboard.repair.payment', ['id' => $repair->id]) }}">
+                @if($payment->status != 'completed')
+                    <form method="POST" action="{{ route('userdashboard.repair.payment', ['id' => $payment->id]) }}">
                         @csrf
                         <input type="hidden" name="repair_id" value="{{ $repair->id }}">
                         <div class="form-group">
