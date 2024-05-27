@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Employee;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
@@ -50,4 +55,37 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('userdashboard');
     }
+
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        // Sprawdź, czy e-mail istnieje w tabelach users, admins lub employees
+        if (
+            User::where('email', $request->email)->exists() ||
+            Admin::where('email', $request->email)->exists() ||
+            Employee::where('email', $request->email)->exists()
+        ) {
+            return redirect()->route('registerForm')->with('error', 'Email jest w użyciu.');
+        }
+
+        // Utwórz nowego użytkownika
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Zarejestrowano pomyślnie.');
+    }
+
 }

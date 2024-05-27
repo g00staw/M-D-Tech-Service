@@ -25,49 +25,48 @@ Route::get('/employee-dashboard', function () {
 })->name('employeedashboard');
 
 Route::controller(UserDashboardController::class)->group(function(){
-    Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices');
     Route::get('/userdashboard','showDashboard')->name('userdashboard');
-    Route::get('/userdashboard/device/add','addUserDevice')->name('userdashboard.add.device');
-    Route::post('/userdashboard/device/add', 'addDeviceToUser')->name('userdashboard.add.device.store');
-    Route::get('/userdashboard/device/{id}', 'findDevice')->name('userdashboard.device');
-    Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs');
-    Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair');
-    Route::post('/userdashboard/repair/add', 'addUserRepair')->name('userdashboard.add.repair.store');
-    Route::get('/userdashboard/repair/{id}', 'showRepair')->name('userdashboard.repair');
-    Route::post('/userdashboard/repair/{id}', 'payForRepair')->name('userdashboard.repair.payment');
+    Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices')->middleware('auth');
+    Route::get('/userdashboard/device/add','addUserDevice')->name('userdashboard.add.device')->middleware('auth');
+    Route::post('/userdashboard/device/add', 'addDeviceToUser')->name('userdashboard.add.device.store')->middleware('auth');
+    Route::get('/userdashboard/device/{id}', 'findDevice')->name('userdashboard.device')->middleware('auth');
+    Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs')->middleware('auth');
+    Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair')->middleware('auth');
+    Route::post('/userdashboard/repair/add', 'addUserRepair')->name('userdashboard.add.repair.store')->middleware('auth');
+    Route::get('/userdashboard/repair/{id}', 'showRepair')->name('userdashboard.repair')->middleware('auth');
+    Route::post('/userdashboard/repair/{id}', 'payForRepair')->name('userdashboard.repair.payment')->middleware('auth');
     Route::get('/userdashboard/add/addReview', 'showReviewForm')->name('userdashboard.addreview')->middleware('auth');
-    Route::post('/userdashboard/add/addReview', 'addReview')->name('userdashboard.add.review');
-    
+    Route::post('/userdashboard/add/addReview', 'addReview')->name('userdashboard.add.review')->middleware('auth');
 });
 
 Route::controller(AdminDashboardController::class)->group(function(){
-    Route::get('/admindashboard', 'showDashboard')->name('admindashboard');
-    Route::get('/admindashboard/employees', 'showEmployees')->name('admindashboard.employees');
-    Route::get('/admindashboard/employee/{id}', 'employeeinfo')->name('admindashboard.employeeinfo');
-    Route::post('/admindashboard/employee/{id}', 'updateEmployeeSalary')->name('admindashboard.employee.updatesalary');
-    Route::post('/admindashboard/employees', 'assignRepairToEmployee')->name('admindashboard.employees.assignRepairToEmployee');
+    Route::get('/admindashboard', 'showDashboard')->name('admindashboard')->middleware('admin');
+    Route::get('/admindashboard/employees', 'showEmployees')->name('admindashboard.employees')->middleware('admin');
+    Route::get('/admindashboard/employee/{id}', 'employeeinfo')->name('admindashboard.employeeinfo')->middleware('admin');
+    Route::post('/admindashboard/employee/{id}', 'updateEmployeeSalary')->name('admindashboard.employee.updatesalary')->middleware('admin');
+    Route::post('/admindashboard/employees', 'assignRepairToEmployee')->name('admindashboard.employees.assignRepairToEmployee')->middleware('admin');
     Route::delete('/admindashboard/employee/{id}', 'deleteEmployee')->name('admindashboard.employee.delete');
-    Route::get('/admindashboard/services', 'displayServices')->name('admindashboard.services');
-    Route::post('/admindashboard/services', 'editService')->name('admindashboard.edit.service');
-    Route::get('/admindashboard/service/add', 'showFormService')->name('admindashboard.addform.service');
-    Route::post('/admindashboard/service/add', 'addService')->name('admindashboard.add.service');
-    Route::get('/admindashboard/service/remove', 'showRemoveFormService')->name('admindashboard.removeForm.service');
-    Route::delete('/admindashboard/service/remove', 'removeService')->name('admindashboard.remove.service');
-    Route::get('/admindashboard/add/employee', 'addEmployeeForm')->name('admindashboard.employee.addForm');
-    Route::post('/admindashboard/add/employee', 'addEmployee')->name('admindashboard.add.employee');
-    Route::get('/admindashboard/devices', 'showDevices')->name('admindashboard.devices');
-    Route::delete('/admindashboard/devices', 'deleteDevice')->name('admindashboard.device.delete');
-    Route::get('/admindashboard/repairs', 'showRepairs')->name('admindashboard.repairs');
-    Route::get('/admindashboard/finanse', 'showFinanse')->name('admindashboard.finanse');
+    Route::get('/admindashboard/services', 'displayServices')->name('admindashboard.services')->middleware('admin');
+    Route::post('/admindashboard/services', 'editService')->name('admindashboard.edit.service')->middleware('admin');
+    Route::get('/admindashboard/service/add', 'showFormService')->name('admindashboard.addform.service')->middleware('admin');
+    Route::post('/admindashboard/service/add', 'addService')->name('admindashboard.add.service')->middleware('admin');
+    Route::get('/admindashboard/service/remove', 'showRemoveFormService')->name('admindashboard.removeForm.service')->middleware('admin');
+    Route::delete('/admindashboard/service/remove', 'removeService')->name('admindashboard.remove.service')->middleware('admin');
+    Route::get('/admindashboard/add/employee', 'addEmployeeForm')->name('admindashboard.employee.addForm')->middleware('admin');
+    Route::post('/admindashboard/add/employee', 'addEmployee')->name('admindashboard.add.employee')->middleware('admin');
+    Route::get('/admindashboard/devices', 'showDevices')->name('admindashboard.devices')->middleware('admin');
+    Route::delete('/admindashboard/devices', 'deleteDevice')->name('admindashboard.device.delete')->middleware('admin');
+    Route::get('/admindashboard/repairs', 'showRepairs')->name('admindashboard.repairs')->middleware('admin');
+    Route::get('/admindashboard/finanse', 'showFinanse')->name('admindashboard.finanse')->middleware('admin');
 });
 
 Route::controller(EmployeeDashboardController::class)->group(function(){
-    Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard');
-    Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee');
-    Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair');
-    Route::post('/employeedashboard/repair/{id}/change-status', 'changeRepairStatus')->name('employeedashboard.repair.changeStatus');
-    Route::post('/employeedashboard/repair/{id}/add-note', 'addRepairNote')->name('employeedashboard.repair.addRepairNote');
-    Route::post('/employeedashboard/repair/{id}/add-payment', 'addNewPayment')->name('employeedashboard.repair.addNewPayment');
+    Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard')->middleware('employee');
+    Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee')->middleware('admin');
+    Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair')->middleware('admin');
+    Route::post('/employeedashboard/repair/{id}/change-status', 'changeRepairStatus')->name('employeedashboard.repair.changeStatus')->middleware('admin');
+    Route::post('/employeedashboard/repair/{id}/add-note', 'addRepairNote')->name('employeedashboard.repair.addRepairNote')->middleware('admin');
+    Route::post('/employeedashboard/repair/{id}/add-payment', 'addNewPayment')->name('employeedashboard.repair.addNewPayment')->middleware('admin');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');
@@ -81,6 +80,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');
     Route::post('/auth/login', 'authenticate')->name('login.authenticate');
     Route::get('/auth/logout', 'logout')->name('logout');
+    Route::get('/register', 'showRegisterForm')->name('registerForm');
+    Route::post('/register', 'register')->name('register');
 });
 
 

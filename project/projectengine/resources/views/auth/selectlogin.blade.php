@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>M&D Tech Service - Choose login</title>
+    <title>M&D Tech Service - zaloguj się</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="text-center justify-content-center">
-                                        <p class="small fw-bold mt-2 pt-1 mb-0">Nie masz konta? <a href="#!"
+                                        <p class="small fw-bold mt-2 pt-1 mb-0">Nie masz konta? <a href="{{ route('registerForm')   }}"
                                                 class="link-danger">Zarejestruj się.</a></p>
                                     </div>
 

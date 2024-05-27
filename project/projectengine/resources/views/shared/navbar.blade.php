@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand btn" href="#"><img src="{{ asset('src/logo.png') }}" height="70"></a>
+    <a class="navbar-brand btn" href="{{ route('userdashboard') }}"><img src="{{ asset('src/logo.png') }}" height="70"></a>
 
     <!-- Toggle button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

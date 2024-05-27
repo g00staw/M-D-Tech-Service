@@ -24,15 +24,13 @@
             aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
             aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner justify-content-center">
           <div class="carousel-item active justify-content-center">
             <img class="d-block border-radius" src="/src/fix.jpg" alt="Naprawa elektroniki" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Naprawy</h5>
-              <p>Zobacz swoje aktywne naprawy. Naciśnij <a href="" class="text-primary">zobacz więcej</a> aby przejść do
+              <p>Zobacz swoje aktywne naprawy. Naciśnij <a href="{{ route('userdashboard.repairs') }}" class="text-primary">zobacz więcej</a> aby przejść do
                 tabeli z naprawami.</p>
             </div>
           </div>
@@ -40,16 +38,8 @@
             <img class="d-block border-radius" src="/src/phone2.jpg" alt="Telefon" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Urządzenia</h5>
-              <p>Zobacz swoje urządzenia. Naciśnij <a href="" class="text-primary">zobacz więcej</a> aby przejść do
+              <p>Zobacz swoje urządzenia. Naciśnij <a href="{{ route('userdashboard.devices') }}" class="text-primary">zobacz więcej</a> aby przejść do
                 tabeli z urządzeniami.</p>
-            </div>
-          </div>
-          <div class="carousel-item justify-content-center">
-            <img class="d-block border-radius" src="/src/mail.jpg" alt="mail" />
-            <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
-              <h5>Tickety / Zgłoszenia</h5>
-              <p>Zobacz swoje tickety. Naciśnij <a href="" class="text-primary">zobacz więcej</a> aby przejść do strony
-                z ticketami.</p>
             </div>
           </div>
         </div>
@@ -139,7 +129,7 @@
                   Dołączysz do grona ekspertów naszego serwisu! <br>
                   </p>
                   <p class="fs-4">
-                    Napisz swoją opinię! <a href="/userdashboard/addReview" class="text-primary">Zobacz więcej.</a>
+                    Napisz swoją opinię! <a href=" {{ route('userdashboard.addreview')}}" class="text-primary">Zobacz więcej.</a>
                   </p>
                 </div>
                 <div class="col">
