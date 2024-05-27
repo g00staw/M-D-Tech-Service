@@ -16,7 +16,7 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid d-flex flex-column align-items-center m-3 justify-content-center">
+  <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
     <h1>Pracownicy | Zgłoszenia</h1>
     <div class="container mt-5 d-flex border custom-card justify-content-between">
       <h4 class="text-sm mb-0 text-capitalize">Liczba aktywnych zgłoszeń:</h4>

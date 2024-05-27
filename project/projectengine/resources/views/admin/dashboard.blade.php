@@ -18,12 +18,12 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid m-3">
+  <div class="container-fluid">
 
     <div class="container d-flex flex-column justify-content-center">
       <h2>Pulpit</h2>
-      <div class="container d-flex">
-        <div class="card w-25 bg-primary bg-opacity-25 m-3 custom-card shadow">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <div class="card bg-primary bg-opacity-25 m-3 custom-card shadow" style="width: 18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -45,7 +45,7 @@
               @endif</span>względem poprzedniego tygodnia.</p>
           </div>
     </div>
-    <div class="card w-25 bg-success bg-opacity-25 m-3  custom-card shadow">
+    <div class="card bg-success bg-opacity-25 m-3  custom-card shadow" style="width: 18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -60,7 +60,7 @@
             
           </div>
     </div>
-    <div class="card w-25 bg-warning bg-opacity-25 m-3  custom-card shadow">
+    <div class="card bg-warning bg-opacity-25 m-3  custom-card shadow" style="width: 18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -74,7 +74,7 @@
           <div class="card-footer p-3">
           </div>
     </div>
-    <div class="card w-25 bg-danger bg-opacity-25 m-3  custom-card shadow">
+    <div class="card bg-danger bg-opacity-25 m-3  custom-card shadow" style="width: 18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -105,7 +105,7 @@
 
     <div class="container d-flex flex-column">
       <h2>Skróty</h2>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center flex-wrap">
         <div class="card m-3 custom-card shadow" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title">Pracownicy</h5>
@@ -119,7 +119,7 @@
             <h5 class="card-title">Usługi</h5>
             <h6 class="card-subtitle mb-2 text-muted">Dashboard do zarządzania usługami.</h6>
             <p class="card-text">Zobacz dostępne usługi, zarządzaj usługami.</p>
-            <a href="#" class="btn btn-primary">Przejdź</a>
+            <a href="{{ route('admindashboard.services') }}" class="btn btn-primary">Przejdź</a>
           </div>
         </div>
         <div class="card m-3 custom-card shadow" style="width: 18rem;">
@@ -127,7 +127,7 @@
             <h5 class="card-title">Urządzenia</h5>
             <h6 class="card-subtitle mb-2 text-muted">Dashboard do zarządzania urządzeniami.</h6>
             <p class="card-text">Zobacz podsumowanie urządzeń, zarządzaj urządzeniami.</p>
-            <a href="#" class="btn btn-primary">Przejdź</a>
+            <a href="{{ route('admindashboard.devices') }}" class="btn btn-primary">Przejdź</a>
           </div>
         </div>
         <div class="card m-3 custom-card shadow" style="width: 18rem;">
@@ -135,7 +135,7 @@
             <h5 class="card-title">Naprawy / zgłoszenia</h5>
             <h6 class="card-subtitle mb-2 text-muted">Dashboard do zarządzania naprawami / zgłoszeniami.</h6>
             <p class="card-text">Zobacz podsumowanie napraw oraz zgłoszeń, zarządzaj zgłoszeniami.</p>
-            <a href="#" class="btn btn-primary">Przejdź</a>
+            <a href="{{ route('admindashboard.repairs') }}" class="btn btn-primary">Przejdź</a>
           </div>
         </div>
         <div class="card m-3 custom-card shadow" style="width: 18rem;">
@@ -143,7 +143,7 @@
             <h5 class="card-title">Finanse</h5>
             <h6 class="card-subtitle mb-2 text-muted">Dashboard do zarządzania naprawami / zgłoszeniami.</h6>
             <p class="card-text">Zobacz podsumowanie napraw oraz zgłoszeń, zarządzaj zgłoszeniami.</p>
-            <a href="#" class="btn btn-primary">Przejdź</a>
+            <a href="{{ route('admindashboard.finanse') }}" class="btn btn-primary">Przejdź</a>
           </div>
         </div>
       </div>

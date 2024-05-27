@@ -16,9 +16,9 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid d-flex flex-column align-items-center m-3">
+  <div class="container-fluid d-flex flex-column align-items-center ">
     <h1>Twoje urządzenia</h1>
-    <div class="custom-container p-3 d-flex flex-column align-items-center">
+    <div class="p-3 d-flex flex-column align-items-center">
       @if(session('error'))
     <div class="alert alert-danger">
       {{ session('error') }}
@@ -42,8 +42,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Dodaj urządzenie do swojego konta.</h5>
-          <p class="card-text">Jeśli posiadasz zakupione urządzenie, możesz dodać je do swojego konta poprzez podanie
-            numeru seryjnego oraz daty zakupu.</p>
+          <p class="card-text">Dodaj urządzenia zerejestrowane w serwisie jak i z poza niego.</p>
           <a href="{{route('userdashboard.add.device')}}" class="btn btn-primary">Dodaj urządzenie</a>
         </div>
       </div>

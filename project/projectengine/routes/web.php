@@ -28,7 +28,8 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard','showDashboard')->name('userdashboard');
     Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices')->middleware('auth');
     Route::get('/userdashboard/device/add','addUserDevice')->name('userdashboard.add.device')->middleware('auth');
-    Route::post('/userdashboard/device/add', 'addDeviceToUser')->name('userdashboard.add.device.store')->middleware('auth');
+    Route::post('/userdashboard/device/add/from-service', 'addDeviceToUser')->name('userdashboard.add.device.fs')->middleware('auth');
+    Route::post('/userdashboard/device/add/from-outside', 'addDevice')->name('userdashboard.add.device.fo')->middleware('auth');
     Route::get('/userdashboard/device/{id}', 'findDevice')->name('userdashboard.device')->middleware('auth');
     Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs')->middleware('auth');
     Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair')->middleware('auth');
@@ -37,6 +38,10 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::post('/userdashboard/repair/{id}', 'payForRepair')->name('userdashboard.repair.payment')->middleware('auth');
     Route::get('/userdashboard/add/addReview', 'showReviewForm')->name('userdashboard.addreview')->middleware('auth');
     Route::post('/userdashboard/add/addReview', 'addReview')->name('userdashboard.add.review')->middleware('auth');
+    Route::get('/userdashboard/profile', 'showProfile')->name('userdashboard.profile')->middleware('auth');
+    Route::post('/userdashboard/profile/change-password', 'updatePassword')->name('userdashboard.profile.psschange')->middleware('auth');
+    Route::post('/userdashboard/profile/change-email', 'updateEmail')->name('userdashboard.profile.emchange')->middleware('auth');
+    Route::post('/userdashboard/profile/change-photo', 'updatePhoto')->name('userdashboard.profile.phchange')->middleware('auth');
 });
 
 Route::controller(AdminDashboardController::class)->group(function(){

@@ -8,12 +8,16 @@ use App\Models\Techservice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\RepairNote;
 use Laravel\Ui\AuthCommand;
 use App\Models\Payment;
 use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\ErrorHandler\Debug;
 
 class UserDashboardController extends Controller
 {
@@ -200,7 +204,95 @@ class UserDashboardController extends Controller
         return redirect()->back()->with('success', 'Opinia została dodana pomyślnie!');
     }
 
-    
+    public function addDevice(Request $request)
+    {
+        $request->validate([
+            'brand' => ['required', 'string', 'max:255'],
+            'model' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255'],
+            'serial_number' => ['required', 'string', 'max:9', 'unique:devices,serial_number'],
+            'purchase-date' => ['required', 'date', 'before_or_equal:today'],
+        ]);
+
+        $device = new Device;
+        $device->user_id = Auth::id();
+        $device->brand = $request->input('brand');
+        $device->model = $request->input('model');
+        $device->type = $request->input('type');
+        $device->serial_number = $request->input('serial_number');
+        $device->purchase_date = $request->input('purchase-date');
+        $device->end_of_warranty = today()->subYears(2)->format('Y-m-d');
+        $device->is_registered = false;
+        $device->save();
+
+        return back()->with('success', 'Pomyślnie przypisano urządzenie do użytkownika.');
+    }
+
+    public function showProfile(Request $request)
+    {
+        return view('user.profile');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Obecne hasło jest nieprawidłowe']);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with('success', 'Hasło zostało pomyślnie zmienione');
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+        if (
+            User::where('email', $request->email)->exists() ||
+            Admin::where('email', $request->email)->exists() ||
+            Employee::where('email', $request->email)->exists()
+        ) {
+            return redirect()->route('userdashboard.profile')->with('error', 'Email jest w użyciu.');
+        }
+
+
+        $user = Auth::user();
+        $user->email = $request->email;
+        $user->save();
+
+        return back()->with('success', 'E-mail został pomyślnie zmieniony');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $request->validate([
+            'profile_photo' => ['nullable', 'image'],
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile_photos', 'public');
+            $user->profile_photo = $path;
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profil został pomyślnie zaktualizowany');
+    }
+
+
 
 
 

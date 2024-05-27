@@ -18,12 +18,12 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid m-3">
+  <div class="container-fluid">
 
     <div class="container d-flex flex-column justify-content-center">
       <h2>Pulpit</h2>
-      <div class="container m-3 d-flex justify-content-center border custom-card">
-        <div class="card w-25 bg-primary bg-opacity-25 m-3 custom-card shadow">
+      <div class="container d-flex justify-content-center border custom-card flex-wrap">
+        <div class="card bg-primary bg-opacity-25 m-3 custom-card shadow" style="witdh:18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -35,7 +35,7 @@
           </div>
           <hr class="dark horizontal my-0">
         </div>
-        <div class="card w-25 bg-primary bg-opacity-25 m-3 custom-card shadow">
+        <div class="card bg-primary bg-opacity-25 m-3 custom-card shadow" style="witdh:18rem;">
           <div class="card-header p-3 pt-2">
             <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
               <i class="material-icons opacity-10"></i>
@@ -80,35 +80,38 @@
       <div class="container d-flex flex-column justify-content-center">
         <h3>Historia płatności</h3>
         <div class="m-1 d-flex justify-content-center border custom-card">
-        <div class="table-responsive m-3">
+        @if (is_null($payments))
+          <p>Brak danych</p>
+        @else
+        <div class="table-responsive"> 
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="m-3"></th>
-                            <th class="m-3">Marka</th>
-                            <th class="m-3">Model</th>
-                            <th class="m-3">Numer seryjny</th>
-                            <th class="m-3">Data zakupu</th>
-                            <th class="m-3">Koniec gwarancji</th>
-                            <th class="m-3">Nazwa właściciela</th>
+                            <th class="m-3">ID</th>
+                            <th class="m-3">Kwota</th>
+                            <th class="m-3">Data</th>
+                            <th class="m-3">Status</th>
+                            <th class="m-3">Metoda</th>
+
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($devices as $device)
+
+                        @foreach ($payments as $payment)
                             <tr>
-                                <td>{{ $device->type }}</td>
-                                <td>{{ $device->brand }}</td>
-                                <td>{{ $device->model }}</td>
-                                <td>{{ $device->serial_number }}</td>
-                                <td>{{ $device->purchase_date }}</td>
-                                <td>{{ $device->end_of_warranty }}</td>
-                                <td>{{ $device->user->name }}</td>
+                                <td>{{ $payment->id }}</td>
+                                <td>{{ $payment->user->name }}</td>
+                                <td>{{ $payment->payment_date }}</td>
+                                <td>{{ $payment->status }}</td>
+                                <td>{{ $payment->payment_method }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        @endif
+        
         </div>
     </div>
 

@@ -15,7 +15,7 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid d-flex flex-column align-items-center m-3 justify-content-center">
+  <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
     <div class="container mt-5 d-flex flex-column border border-radius">
       <h2>Dodaj opinię</h2>
 

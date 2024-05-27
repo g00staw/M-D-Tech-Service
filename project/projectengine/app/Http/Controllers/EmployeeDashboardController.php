@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Models\User;
 use App\Models\Repair;
+use App\Models\Device;
 use App\Models\Employee;
 use App\Models\Payment;
 use Laravel\Ui\AuthCommand;
@@ -116,6 +117,10 @@ class EmployeeDashboardController extends Controller
         $repair->completion_date = today();
         $repair->save();
 
+        $deviceID = $repair->device_id;
+        $device = Device::findOrFail($deviceID);
+        $device->is_registered = true;
+        $device->save();
         
         $payment = new Payment;
         $payment->user_id = $request->input('user_id');
@@ -125,6 +130,8 @@ class EmployeeDashboardController extends Controller
         $payment->payment_method = null;
         $payment->payment_date = null;
         $payment->save();
+
+        
 
 
 

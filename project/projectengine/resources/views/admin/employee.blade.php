@@ -16,7 +16,7 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid d-flex flex-column align-items-center m-3">
+  <div class="container-fluid d-flex flex-column align-items-center">
     <div class="container">
       @if (session('error'))
     <div class="alert alert-danger">

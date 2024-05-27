@@ -17,7 +17,7 @@
   @include('shared.navbar')
 
   <div class="container-fluid ">
-    <div class="custom-container">
+    <div class="">
       <div id="carouselExampleCaptions" class="carousel slide p-3" data-bs-ride="false">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -30,7 +30,8 @@
             <img class="d-block border-radius" src="/src/fix.jpg" alt="Naprawa elektroniki" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Naprawy</h5>
-              <p>Zobacz swoje aktywne naprawy. Naciśnij <a href="{{ route('userdashboard.repairs') }}" class="text-primary">zobacz więcej</a> aby przejść do
+              <p class="d-md-none d-sm-block">Zobacz swoje aktywne naprawy. Naciśnij <a
+                  href="{{ route('userdashboard.repairs') }}" class="text-primary">zobacz więcej</a> aby przejść do
                 tabeli z naprawami.</p>
             </div>
           </div>
@@ -38,7 +39,8 @@
             <img class="d-block border-radius" src="/src/phone2.jpg" alt="Telefon" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Urządzenia</h5>
-              <p>Zobacz swoje urządzenia. Naciśnij <a href="{{ route('userdashboard.devices') }}" class="text-primary">zobacz więcej</a> aby przejść do
+              <p class="d-md-none d-sm-block">Zobacz swoje urządzenia. Naciśnij <a
+                  href="{{ route('userdashboard.devices') }}" class="text-primary">zobacz więcej</a> aby przejść do
                 tabeli z urządzeniami.</p>
             </div>
           </div>
@@ -60,21 +62,22 @@
       <div class="d-flex flex-column align-items-center p-3 ">
         <h2>Dostępne usługi</h2>
         <div class="container d-flex flex-wrap justify-content-center">
-            @foreach ($services as $service)
-              <div class="card card-effect m-3" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">{{$service -> title}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Cena min*: {{$service -> price_min}}</h6>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Cena max*: {{$service -> price_max}}</h6>
-                  <p class="card-text">{{$service -> description}}</p>
-                  <div class="mt-auto p-2">
-                  </div>
-                </div>
-              </div>
-            @endforeach
-            
+          @foreach ($services as $service)
+      <div class="card card-effect m-3" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">{{$service->title}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Cena min*: {{$service->price_min}}</h6>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Cena max*: {{$service->price_max}}</h6>
+        <p class="card-text">{{$service->description}}</p>
+        <div class="mt-auto p-2">
         </div>
-        <h6 class="card-subtitle mb-2 text-body-secondary">* - cena proponowana, zależna od urządzenia oraz wartości części</h6>
+        </div>
+      </div>
+    @endforeach
+
+        </div>
+        <h6 class="card-subtitle mb-2 text-body-secondary">* - cena proponowana, zależna od urządzenia oraz wartości
+          części</h6>
       </div>
     </div>
 
@@ -91,45 +94,47 @@
           </li>
         </ul>
         <div class="tab-content p-3 flex-column justify-content-center" id="myTabContent">
-          <div class="flex-column tab-pane fade show active justify-content-center" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="flex-column tab-pane fade show active justify-content-center" id="home" role="tabpanel"
+            aria-labelledby="home-tab">
             <div class="d-flex flex-wrap justify-content-center">
               @foreach ($ratings as $rating)
-               <div class="card text-bg-primary m-1" style="max-width: 18rem;">
-                   <div class="card-header">
-                     <p class="font-weight-light">Użytkownik:</p>
-                     <h5>{{ $rating->user->name }}</h5>
-                   </div>
-                   <div class="card-body">
-                       <p class="font-weight-light">Tytuł naprawy:</p>
-                       <h5 class="card-title">{{ $rating->repair->repair_title }}</h5>
-                       <h5 class="card-title">Ocena: {{ $rating->rating }} / 5</h5>
-                       <p class="card-text">Komenatrz: {{ $rating->review }}</p>
-                   </div>
-               </div>
-              @endforeach
+        <div class="card text-bg-primary m-1" style="max-width: 18rem;">
+          <div class="card-header">
+          <p class="font-weight-light">Użytkownik:</p>
+          <h5>{{ $rating->user->name }}</h5>
+          </div>
+          <div class="card-body">
+          <p class="font-weight-light">Tytuł naprawy:</p>
+          <h5 class="card-title">{{ $rating->repair->repair_title }}</h5>
+          <h5 class="card-title">Ocena: {{ $rating->rating }} / 5</h5>
+          <p class="card-text">Komenatrz: {{ $rating->review }}</p>
+          </div>
+        </div>
+      @endforeach
             </div>
-        
+
             <ul class="pagination pagination-sm justify-content-center">
               @for ($i = 1; $i <= $ratings->lastPage(); $i++)
-                  <li class="page-item {{ ($ratings->currentPage() == $i) ? 'active' : '' }}">
-                      <a class="page-link" href="{{ $ratings->url($i) }}">{{ $i }}</a>
-                  </li>
-              @endfor
-           </ul>
+        <li class="page-item {{ ($ratings->currentPage() == $i) ? 'active' : '' }}">
+          <a class="page-link" href="{{ $ratings->url($i) }}">{{ $i }}</a>
+        </li>
+      @endfor
+            </ul>
 
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="container">
               <div class="row">
                 <div class="col">
-                <h3 class="fs-1 fs-2 fs-4">Dlaczego warto oceniać produkty?</h3>
+                  <h3 class="fs-1 fs-2 fs-4">Dlaczego warto oceniać produkty?</h3>
                   <p class="fs-1 fs-2 fs-4">
-                  Pomagasz innym klientom zdecydować się na naprawę swoich urządzeń.  <br>
-                  Przekazujesz nam cenne wskazówki o ofercie i jakości usług. <br>
-                  Dołączysz do grona ekspertów naszego serwisu! <br>
+                    Pomagasz innym klientom zdecydować się na naprawę swoich urządzeń. <br>
+                    Przekazujesz nam cenne wskazówki o ofercie i jakości usług. <br>
+                    Dołączysz do grona ekspertów naszego serwisu! <br>
                   </p>
                   <p class="fs-4">
-                    Napisz swoją opinię! <a href=" {{ route('userdashboard.addreview')}}" class="text-primary">Zobacz więcej.</a>
+                    Napisz swoją opinię! <a href=" {{ route('userdashboard.addreview')}}" class="text-primary">Zobacz
+                      więcej.</a>
                   </p>
                 </div>
                 <div class="col">
@@ -137,15 +142,15 @@
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

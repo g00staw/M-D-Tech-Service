@@ -16,7 +16,7 @@
 <body class="bg-gray">
   @include('shared.navbar')
 
-  <div class="container-fluid d-flex flex-column align-items-center m-3 justify-content-center">
+  <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
     <h1>Usługi</h1>
 
     @if (session('error'))
@@ -30,7 +30,7 @@
             </div>
         @endif
 
-    <div class="container mt-5 d-flex flex-wrap border border-radius">
+    <div class="container mt-5 d-flex flex-wrap border border-radius justify-content-center">
       @foreach ($services as $service)
     <div class="card card-effect m-3" style="width: 18rem;">
       <div class="card-body">
