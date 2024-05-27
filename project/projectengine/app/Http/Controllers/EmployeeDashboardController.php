@@ -75,8 +75,9 @@ class EmployeeDashboardController extends Controller
         $repair = Repair::findOrFail($id);
 
         $notes = RepairNote::where('repair_id', $id)->orderBy('sent_date', 'desc')->get();
+        $device = $repair->device;
 
-        return view('employee.repair', ['repair' => $repair, 'notes' => $notes]);
+        return view('employee.repair', ['repair' => $repair, 'notes' => $notes, 'device' => $device]);
     }
 
     public function addRepairNote(Request $request, $repairId)
@@ -94,6 +95,8 @@ class EmployeeDashboardController extends Controller
 
         return redirect()->back()->with('success', 'Notatka została pomyślnie dodana.');
     }
+
+    
 
 
 

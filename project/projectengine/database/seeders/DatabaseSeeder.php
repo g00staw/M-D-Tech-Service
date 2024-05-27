@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
                 'serial_number' => '0385298571',
                 'purchase_date' => '2023-10-10',
                 'end_of_warranty' => '2025-10-10', // poprawny format!
+                'is_registered' => true,
                 'type' => 'smartphone',
                 'user_id' => '1',
             ],
@@ -52,6 +53,7 @@ class DatabaseSeeder extends Seeder
                 'serial_number' => '7512012957',
                 'purchase_date' => '2024-05-07',
                 'end_of_warranty' => '2026-05-07',
+                'is_registered' => true,
                 'type' => 'smartphone',
                 'user_id' => null,
             ],
@@ -61,6 +63,7 @@ class DatabaseSeeder extends Seeder
                 'serial_number' => '1912012942',
                 'purchase_date' => '2024-05-07',
                 'end_of_warranty' => '2026-05-07',
+                'is_registered' => true,
                 'type' => 'smartphone',
                 'user_id' => 1,
             ],

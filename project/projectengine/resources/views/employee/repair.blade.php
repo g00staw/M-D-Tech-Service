@@ -63,7 +63,9 @@
                     </form>
 
                 </div>
-                <div class="slider" style="overflow-y: scroll; height: 200px;">
+                <hr>
+                <h2>Notatki naprawy:</h2>
+                <div class="slider m-3" style="overflow-y: scroll; height: 200px; width:550px;">
                     @foreach ($notes as $note)
                         <div class="note">
                             <p><strong>Data wysłania:</strong> {{ $note->sent_date }}</p>
@@ -72,27 +74,86 @@
                         <hr>
                     @endforeach
                 </div>
+                <hr>
+                <h2>Dodaj notatki do naprawy</h2>
+                <form method="POST" action="{{ route('employeedashboard.addRepairNote', ['id' => $repair->id]) }}">
+                    @csrf
+                    <div class="form-group">
+                        <input type="hidden" name="repair_id" value="{{ $repair->id }}">
+                        <label for="message_content">Treść notatki:</label>
+                        <textarea name="message_content" class="form-control" style="width: 550px" id="message_content"
+                            rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Dodaj notatkę</button>
+                </form>
             </div>
+        </div>
+        <div class="container d-flex flex-column align-items-center border border-radius p-3">
+            <h2>Zakończenie naprawy oraz wystawienie rachunku / płatności</h2>
 
-            <h2>Dodaj notatki do naprawy</h2>
-            <form method="POST" action="{{ route('employeedashboard.addRepairNote', ['id' => $repair->id]) }}">
-                @csrf
+            <form id="invoiceForm"  method="POST" action="{{route('employeedashboard.repair.addNewPayment')}}">
                 <div class="form-group">
-                    <input type="hidden" name="repair_id" value="{{ $repair->id }}">
-                    <label for="message_content">Treść notatki:</label>
-                    <textarea name="message_content" class="form-control" id="message_content" rows="3"
-                        required></textarea>
+                    <label for="basePrice">Podstawowa cena usługi:</label>
+                    <input type="number" id="basePrice" class="form-control" min="0" step="0.01">
                 </div>
-                <button type="submit" class="btn btn-primary">Dodaj notatkę</button>
+                <div class="form-group">
+                    <label for="deviceRegistered">Czy urządzenie jest zarejestrowane?</label>
+                    <input type="text" id="deviceRegistered" class="form-control"
+                        value="{{ $device->is_registered ? 'Tak' : 'Nie' }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="warrantyStatus">Status gwarancji:</label>
+                    <input type="text" id="warrantyStatus" class="form-control"
+                        value="{{ $device->end_of_warranty > now() ? 'Aktywna' : 'Wygasła' }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="finalPrice">Końcowa cena usługi:</label>
+                    <input type="number" id="finalPrice" class="form-control" readonly>
+                </div>
             </form>
+            <hr>
 
-
+            <button type="submit" class="btn btn-primary">Ukończ naprawę i wystaw rachunek</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        window.onload = function () {
+            var basePriceInput = document.getElementById('basePrice');
+            var isRegistered = "{{ $device->is_registered }}";
+            var endOfWarranty = new Date("{{ $device->end_of_warranty }}");
+            var now = new Date();
+
+            basePriceInput.addEventListener('input', function () {
+                var basePrice = parseFloat(basePriceInput.value);
+                var monthsAfterWarranty = Math.floor((now - endOfWarranty) / (1000 * 60 * 60 * 24 * 30));
+                var discount = 0;
+
+                if (isRegistered === "1") {
+                    if (monthsAfterWarranty <= 0) {
+                        discount = 100;
+                    } else if (monthsAfterWarranty <= 1) {
+                        discount = 75;
+                    } else if (monthsAfterWarranty <= 3) {
+                        discount = 50;
+                    } else if (monthsAfterWarranty <= 6) {
+                        discount = 25;
+                    } else if (monthsAfterWarranty <= 12) {
+                        discount = 15;
+                    } else {
+                        discount = 10;
+                    }
+                }
+
+                var finalPrice = basePrice * (1 - discount / 100);
+                document.getElementById('finalPrice').value = finalPrice.toFixed(2);
+            });
+        }
+    </script>
+
 </body>
 
 </html>
