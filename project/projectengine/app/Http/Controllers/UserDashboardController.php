@@ -192,12 +192,13 @@ class UserDashboardController extends Controller
             return redirect()->back()->withErrors(['error' => 'Możesz dodać opinię tylko do zakończonych napraw.']);
         }
 
-        Rating::create([
-            'user_id' => Auth::id(),
-            'repair_id' => $request->repair_id,
-            'rating' => $request->rating,
-            'review' => $request->review,
-        ]);
+        $rating = new Rating();
+        $rating->user_id = auth()->id();
+        $rating->repair_id = $request->input('repair_id');
+        $rating->rating = $request->input('rating');
+        $rating->review = $request->input('review');
+        $rating->save();
+
 
         return redirect()->back()->with('success', 'Opinia została dodana pomyślnie!');
     }
