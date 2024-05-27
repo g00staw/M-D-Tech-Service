@@ -36,6 +36,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ $repair->repair_title }}</h6>
                     <p class="card-text">
                         <strong>Status:</strong> {{ $repair->status }}<br>
+                        <strong>Urządzenie:</strong> {{ $repair->device->brand }} {{ $repair->device->model }}<br>
                         <strong>Data zgłoszenia:</strong> {{ $repair->report_date }}<br>
                         <strong>Data zakończenia:</strong> {{ $repair->completion_date }}<br>
                         <strong>Notatki użytkownika:</strong> {{ $repair->user_notes }}
@@ -49,16 +50,13 @@
                 <h2>Wybierz stan zgłoszenia</h2>
                 <div class="form-group d-flex align-items-center justify-content-center">
 
-                    <form id="deviceForm" method="POST" action="{{route('userdashboard.add.repair.store')}}">
+                    <form id="deviceForm" method="POST" action="{{route('employeedashboard.repair.changeStatus', ['id' => $repair->id])}}">
                         @csrf
                         <select name="status" class="form-control">
                             <option value="w trakcie realizacji">W realizacji</option>
                             <option value="oczekiwanie na częsci">Oczekiwanie na częsci</option>
                             <hr>
-                            <option value="ukończono">Ukończono</option>
                         </select>
-                        <div id="dscHelp" class="form-text">Po wybraniu opcji ukończono zgłoszenie zostanie zablokowane,
-                            zachowaj ostrożność.</div>
                         <button type="submit" class="btn btn-primary">Zmień status</button>
                     </form>
 
@@ -76,7 +74,7 @@
                 </div>
                 <hr>
                 <h2>Dodaj notatki do naprawy</h2>
-                <form method="POST" action="{{ route('employeedashboard.addRepairNote', ['id' => $repair->id]) }}">
+                <form method="POST" action="{{ route('employeedashboard.repair.addRepairNote', ['id' => $repair->id]) }}">
                     @csrf
                     <div class="form-group">
                         <input type="hidden" name="repair_id" value="{{ $repair->id }}">
@@ -91,7 +89,11 @@
         <div class="container d-flex flex-column align-items-center border border-radius p-3">
             <h2>Zakończenie naprawy oraz wystawienie rachunku / płatności</h2>
 
-            <form id="invoiceForm"  method="POST" action="{{route('employeedashboard.repair.addNewPayment')}}">
+            <form id="invoiceForm"  method="POST" action="{{route('employeedashboard.repair.addNewPayment', ['id' => $repair->id])}}">
+                @csrf
+                <input type="hidden" name="repair_id" value="{{ $repair->id }}">
+                <input type="hidden" name="device_id" value="{{ $device->id }}">
+                <input type="hidden" name="user_id" value="{{ $repair->user_id }}">
                 <div class="form-group">
                     <label for="basePrice">Podstawowa cena usługi:</label>
                     <input type="number" id="basePrice" class="form-control" min="0" step="0.01">
@@ -108,12 +110,12 @@
                 </div>
                 <div class="form-group">
                     <label for="finalPrice">Końcowa cena usługi:</label>
-                    <input type="number" id="finalPrice" class="form-control" readonly>
+                    <input type="number" name="final_price" id="finalPrice" class="form-control" readonly>
                 </div>
+                <hr>
+                <button type="submit" class="btn btn-primary">Ukończ naprawę i wystaw rachunek</button>
             </form>
             <hr>
-
-            <button type="submit" class="btn btn-primary">Ukończ naprawę i wystaw rachunek</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

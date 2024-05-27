@@ -26,7 +26,7 @@ class EmployeeDashboardController extends Controller
         $nonCompletedRepairsCount = Repair::countNonCompletedRepairs();
         $reportedRepairs = Repair::countReportedRepairs();
 
-        $unfinishedRepairs = Repair::where('employee_id', $employeeID)->where('status', '!=', 'ukończono')->get();
+        $unfinishedRepairs = Repair::where('employee_id', $employeeID)->whereNot('status', 'ukończono')->get();
 
         $numberOfUnfinishedRepairs = $unfinishedRepairs->count();
 
@@ -34,7 +34,7 @@ class EmployeeDashboardController extends Controller
             ->whereNull('employee_id')
             ->paginate(5, ['*'], 'repairs_page');
 
-        $yourRepairs = Repair::whereNot('status', 'ukończone')
+        $yourRepairs = Repair::whereNot('status', 'ukończono')
             ->where('employee_id', $employeeID)
             ->paginate(5, ['*'], 'yourrepairs_page');
 
@@ -80,6 +80,15 @@ class EmployeeDashboardController extends Controller
         return view('employee.repair', ['repair' => $repair, 'notes' => $notes, 'device' => $device]);
     }
 
+    public function changeRepairStatus(Request $request, $repairId){
+        $repair = Repair::findOrFail($repairId);
+
+        $repair->status = $request->input('status');
+        $repair->save();
+
+        return redirect()->back()->with('success', 'Zmieniono status naprawy.');
+    }
+
     public function addRepairNote(Request $request, $repairId)
     {
         $request->validate([
@@ -96,7 +105,33 @@ class EmployeeDashboardController extends Controller
         return redirect()->back()->with('success', 'Notatka została pomyślnie dodana.');
     }
 
-    
+    public function addNewPayment(Request $request, $repairId){
+
+        $request->validate([
+            'final_price' => 'required|numeric|between:0,9999999999.99',
+        ]);
+
+        $repair = Repair::findOrFail($repairId);
+        $repair->status = 'ukończono';
+        $repair->completion_date = today();
+        $repair->save();
+
+        
+        $payment = new Payment;
+        $payment->user_id = $request->input('user_id');
+        $payment->repair_id =$repairId;
+        $payment->amount = $request->input('final_price');
+        $payment->status = 'pending';
+        $payment->payment_method = null;
+        $payment->payment_date = null;
+        $payment->save();
+
+
+
+        return redirect()->route('employeedashboard')->with('success', 'Pomyślnie zakończono naprawę.');
+    }
+
+
 
 
 

@@ -33,6 +33,10 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::get('/userdashboard/repairs', 'showRepairs')->name('userdashboard.repairs');
     Route::get('/userdashboard/repair/add', 'showRepairForm')->name('userdashboard.add.repair');
     Route::post('/userdashboard/repair/add', 'addUserRepair')->name('userdashboard.add.repair.store');
+    Route::get('/userdashboard/repair/{id}', 'showRepair')->name('userdashboard.repair');
+    Route::post('/userdashboard/repair/{id}', 'payForRepair')->name('userdashboard.repair.payment');
+    Route::get('/userdashboard/add/addReview', 'showReviewForm')->name('userdashboard.addreview')->middleware('auth');
+    Route::post('/userdashboard/add/addReview', 'addReview')->name('userdashboard.add.review');
     
 });
 
@@ -61,7 +65,9 @@ Route::controller(EmployeeDashboardController::class)->group(function(){
     Route::get('/employeedashboard', 'showDashboard')->name('employeedashboard');
     Route::post('/employeedashboard', 'assignRepairToEmployee')->name('employeedashboard.assignRepairToEmployee');
     Route::get('/employeedashboard/repair/{id}', 'showRepair')->name('employeedashboard.repair');
-    Route::post('/employeedashboard/repair/{id}', 'addRepairNote')->name('employeedashboard.addRepairNote');
+    Route::post('/employeedashboard/repair/{id}/change-status', 'changeRepairStatus')->name('employeedashboard.repair.changeStatus');
+    Route::post('/employeedashboard/repair/{id}/add-note', 'addRepairNote')->name('employeedashboard.repair.addRepairNote');
+    Route::post('/employeedashboard/repair/{id}/add-payment', 'addNewPayment')->name('employeedashboard.repair.addNewPayment');
 });
 
 /* Route::get('/userdashboard/devices', [UserDashboardController::class, 'showUserDevices'])->name('userdashboard.devices');

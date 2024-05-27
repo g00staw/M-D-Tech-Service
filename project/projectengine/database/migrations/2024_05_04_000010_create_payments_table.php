@@ -13,9 +13,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('repair_id')->constrained();
             $table->decimal('amount', 10, 2);
-            $table->date('payment_date');
+            $table->date('payment_date')->nullable();
             $table->enum('status', ['pending', 'completed', 'cancelled']);
-            $table->enum('payment_method', ['credit_card', 'paypal', 'cash']); // Dodano 'cash'
+            $table->enum('payment_method', ['credit_card', 'paypal', 'cash'])->nullable(); // Dodano 'cash'
             $table->timestamps();
         });
     }

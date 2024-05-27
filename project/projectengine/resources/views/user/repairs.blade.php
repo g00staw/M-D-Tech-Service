@@ -29,6 +29,9 @@
                 <a href="{{route('userdashboard.add.repair')}}" class="btn btn-primary">Dodaj zgłoszenie</a>
               </div>
           </div>
+          @if ($repairs==null)
+          <h3>Brak urządzeń do wyświetlenia</h3>
+  @else
       <div class="table-responsive m-3">
           <table class="table table-striped table-hover">
               <thead>
@@ -55,7 +58,7 @@
                         <td>{{$repair->report_date}}</td>
                         <td>{{$repair->completion_date}}</td>
                         <td>{{$repair->user_notes}}</td>
-                        <td><a href="{{route('userdashboard.add.device')}}" class="btn btn-primary">Zobacz więcej</a></td>
+                        <td><a href="{{ route('userdashboard.repair', ['id' => $repair->id]) }}" class="btn btn-primary">Przejdź</a></td>
                   </tr>
                   @endforeach
               </thead>
@@ -65,6 +68,7 @@
           </table>
           
       </div>
+      @endif
     </div>
     <!-- Linki do paginacji -->
     <div class="d-flex justify-content-center">

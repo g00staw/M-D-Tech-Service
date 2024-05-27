@@ -139,7 +139,7 @@
                   Dołączysz do grona ekspertów naszego serwisu! <br>
                   </p>
                   <p class="fs-4">
-                    Napisz swoją opinię! <a class="text-primary">Zobacz więcej.</a>
+                    Napisz swoją opinię! <a href="/userdashboard/addReview" class="text-primary">Zobacz więcej.</a>
                   </p>
                 </div>
                 <div class="col">

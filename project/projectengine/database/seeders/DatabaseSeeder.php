@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Device::insert([
-            [
+           /*  [
                 'brand' => 'Samsung',
                 'model' => 'S23',
                 'serial_number' => '0385298571',
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 'is_registered' => true,
                 'type' => 'smartphone',
                 'user_id' => '1',
-            ],
+            ], */
             [
                 'brand' => 'iPhone',
                 'model' => '13 Pro',
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => null,
             ],
-            [
+            /* [
                 'brand' => 'iPhone',
                 'model' => '15 Pro',
                 'serial_number' => '1912012942',
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => 1,
             ],
-
+ */
         ]);
 
         Employee::factory()->create([
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Repair::insert([
-            [
+           /*  [
                 'device_id' => '1',
                 'employee_id' => '1',
                 'user_id' => '1',
@@ -93,92 +93,12 @@ class DatabaseSeeder extends Seeder
                 'user_notes' => 'Rozbity ekran',
                 'status' => 'zgłoszone',
                 'repair_title' => 'Wymiana ekranu'
-            ],
-            [
-                'device_id' => '1',
-                'employee_id' => '1',
-                'user_id' => '1',
-                'report_date' => '2024-5-11', // poprawny format!
-                'user_notes' => 'Telefon sie wyłącza po wyciągnięciu ładowarki',
-                'status' => 'zgłoszone',
-                'repair_title' => 'Problem z baterią'
-            ],
-            [
-                'device_id' => '1',
-                'employee_id' => '1',
-                'user_id' => '1',
-                'report_date' => '2024-5-12', // poprawny format!
-                'user_notes' => 'Rozbity ekran',
-                'status' => 'zgłoszone',
-                'repair_title' => 'Wymiana ekranu'
-            ],
-            [
-                'device_id' => '1',
-                'employee_id' => '1',
-                'user_id' => '1',
-                'report_date' => '2024-5-13', // poprawny format!
-                'user_notes' => 'Rozbity ekran',
-                'status' => 'zgłoszone',
-                'repair_title' => 'Wymiana ekranu'
-            ],
-            [
-                'device_id' => '1',
-                'employee_id' => '1',
-                'user_id' => '1',
-                'report_date' => '2024-5-14', // poprawny format!
-                'user_notes' => 'Rozbity ekran',
-                'status' => 'zgłoszone',
-                'repair_title' => 'Wymiana ekranu'
-            ],
-            [
-                'device_id' => '1',
-                'employee_id' => null,
-                'user_id' => '1',
-                'report_date' => '2024-5-15', // poprawny format!
-                'user_notes' => 'Rozbity ekran',
-                'status' => 'zgłoszone',
-                'repair_title' => 'Wymiana ekranu'
-            ],
+            ], */
 
         ]);
 
         Rating::insert([
-            [
-                'user_id' => '1',
-                'repair_id' => '1',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
-            [
-                'user_id' => '1',
-                'repair_id' => '2',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
-            [
-                'user_id' => '1',
-                'repair_id' => '3',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
-            [
-                'user_id' => '1',
-                'repair_id' => '4',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
-            [
-                'user_id' => '1',
-                'repair_id' => '5',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
-            [
-                'user_id' => '1',
-                'repair_id' => '6',
-                'rating' => 5,
-                'review' => "wszystko ok",
-            ],
+        
 
         ]);
 
@@ -232,54 +152,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Payment::insert([
-            [
-                'user_id' => 1,
-                'repair_id' => 1,
-                'amount' => 150.00,
-                'payment_date' => '2024-5-21',
-                'status' => 'completed',
-                'payment_method' => 'credit_card'
-            ],
-            [
-                'user_id' => 1,
-                'repair_id' => 2,
-                'amount' => 200.50,
-                'payment_date' => '2024-5-20',
-                'status' => 'completed',
-                'payment_method' => 'paypal'
-            ],
-            [
-                'user_id' => 1,
-                'repair_id' => 3,
-                'amount' => 75.00,
-                'payment_date' => '2024-5-19',
-                'status' => 'completed',
-                'payment_method' => 'cash'
-            ],
-            [
-                'user_id' => 1,
-                'repair_id' => 4,
-                'amount' => 120.75,
-                'payment_date' => '2024-5-18',
-                'status' => 'completed',
-                'payment_method' => 'credit_card'
-            ],
-            [
-                'user_id' => 1,
-                'repair_id' => 5,
-                'amount' => 99.99,
-                'payment_date' => '2024-5-17',
-                'status' => 'completed',
-                'payment_method' => 'paypal'
-            ],
-            [
-                'user_id' => 1,
-                'repair_id' => 6,
-                'amount' => 130.00,
-                'payment_date' => '2024-5-16',
-                'status' => 'completed',
-                'payment_method' => 'cash'
-            ],
+        
         ]);
 
 
