@@ -14,10 +14,6 @@
                         <a>Numer telefonu:</a>
                         <a>+48 123 456 789</a>
                     </li>
-                    <li>
-                        <a>Zgłoś:</a>
-                        <a href="">Formularz zgłoszeniowy</a>
-                    </li>
                 </ul>
             </div>
             <div class="row">

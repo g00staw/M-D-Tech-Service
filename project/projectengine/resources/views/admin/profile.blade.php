@@ -132,5 +132,5 @@
                         $('.dropdown-toggle').dropdown()
                     </script>
 </body>
-
+@include('shared.footer')
 </html>

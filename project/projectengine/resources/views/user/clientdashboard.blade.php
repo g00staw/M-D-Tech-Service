@@ -30,16 +30,16 @@
             <img class="d-block border-radius" src="/src/fix.jpg" alt="Naprawa elektroniki" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Naprawy</h5>
-              <p class="d-md-none d-sm-block">Zobacz swoje aktywne naprawy. Naciśnij <a
-                  href="{{ route('userdashboard.repairs') }}" class="text-primary">zobacz więcej</a> aby przejść do
-                tabeli z naprawami.</p>
+              <p class="d-sm-block">Zobacz swoje aktywne naprawy. Naciśnij <a
+    href="{{ route('userdashboard.repairs') }}" class="text-primary">zobacz więcej</a> aby przejść do
+  tabeli z naprawami.</p>
             </div>
           </div>
           <div class="carousel-item justify-content-center">
             <img class="d-block border-radius" src="/src/phone2.jpg" alt="Telefon" />
             <div class="carousel-caption d-none d-md-block text-dark bg-white bg-opacity-50 border-radius">
               <h5>Urządzenia</h5>
-              <p class="d-md-none d-sm-block">Zobacz swoje urządzenia. Naciśnij <a
+              <p class="d-sm-block">Zobacz swoje urządzenia. Naciśnij <a
                   href="{{ route('userdashboard.devices') }}" class="text-primary">zobacz więcej</a> aby przejść do
                 tabeli z urządzeniami.</p>
             </div>

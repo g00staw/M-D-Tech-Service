@@ -176,5 +176,5 @@
     </script>
   @endif
 </body>
-
+@include('shared.footer')
 </html>

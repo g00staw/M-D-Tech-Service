@@ -19,7 +19,7 @@
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item d-flex justify-content-center align-items-center active">
-                        <img src="/src/logowhite.png" class="d-block w-50" alt="...">
+                        <img src="/src/logowhite.png" class="d-block" alt="...">
                     </div>
                 </div>
             </div>
@@ -75,36 +75,8 @@
 
         </div>
     </div>
-
-    <footer>
-        <div class="footer">
-            <div class="row">
-                <ul>
-                    <li>
-                        <a>Autor: </a>
-                        <a>Konrad Pluta</a>
-                    </li>
-                    <li>
-                        <a>E-mail:</a>
-                        <a>adres@email.com</a>
-                    </li>
-                    <li>
-                        <a>Numer telefonu:</a>
-                        <a>+48 123 456 789</a>
-                    </li>
-                    <li>
-                        <a>Zgłoś:</a>
-                        <a href="">Formularz zgłoszeniowy</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="row">
-                Strona stworzona na potrzeby projektu z przedmiotu: Aplikacje Internetowe.
-            </div>
-        </div>
-    </footer>
-
 </body>
+@include('shared.footer')
 
 
 </html>
