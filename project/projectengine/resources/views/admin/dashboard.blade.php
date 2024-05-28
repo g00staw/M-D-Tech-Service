@@ -94,9 +94,9 @@
     </div>
     <div class="container d-flex flex-column justify-content-center">
       <h3>Dochód z ostatnich 7 dni</h3>
-      <div class="m-3 d-flex justify-content-center">
+      <div class="d-flex justify-content-center">
         @if ($hasData)
-            <canvas class="w-50 h-50" id="barChart"></canvas>
+            <canvas class="" id="barChart"></canvas>
         @else
             <p>No data available</p>
         @endif

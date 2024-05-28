@@ -19,6 +19,9 @@
   <div class="container-fluid d-flex flex-column align-items-center m-3">
     <h1>Naprawy</h1>
     <div class="custom-container p-3 d-flex flex-column align-items-center">
+      @if ($repairs->isEmpty())
+      <h3>Brak urządzeń do wyświetlenia</h3>
+       @else
       <div class="table-responsive m-3">
           <table class="table table-striped table-hover">
               <thead>
@@ -46,7 +49,14 @@
                         <td>{{$repair->report_date}}</td>
                         <td>{{$repair->completion_date}}</td>
                         <td>{{$repair->user_notes}}</td>
-                        <td>{{$repair->employee->name}}</td>
+                       
+                        <td>
+                        @if ($repair->status == 'zgłoszone')
+                        <p>Nie przypisano</p>
+                        @else
+                        {{$repair->employee->name}}
+                        @endif
+                        </td>
                   </tr>
                   @endforeach
               </thead>
@@ -56,6 +66,7 @@
           </table>
           
       </div>
+      @endif
       <div class="container mt-5">
       <ul class="pagination pagination-sm justify-content-center">
         @for ($i = 1; $i <= $repairs->lastPage(); $i++)

@@ -101,7 +101,11 @@
                         @foreach ($payments as $payment)
                             <tr>
                                 <td>{{ $payment->id }}</td>
+                                @if($payment->user->name != null)
                                 <td>{{ $payment->user->name }}</td>
+                                @else
+                                <td>brak danych</td>
+                                @endif
                                 <td>{{ $payment->payment_date }}</td>
                                 <td>{{ $payment->status }}</td>
                                 <td>{{ $payment->payment_method }}</td>

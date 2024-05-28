@@ -261,12 +261,12 @@ class AdminDashboardController extends Controller
         ]);
 
         if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
-            return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
+            return redirect()->route('admindashboard.devices')->with(['error' => 'Niepoprawne hasło']);
         }
 
         $activeRepair = Repair::where('device_id', $request->input('device_id'))->where('status', '!=', 'ukończono')->first();
         if ($activeRepair) {
-            return redirect()->back()->withErrors(['device' => 'Urządzenie jest aktualnie naprawiane i nie może być usunięte.']);
+            return redirect()->route('admindashboard.devices')->with(['error' => 'Urządzenie jest aktualnie naprawiane i nie może być usunięte.']);
         }
 
         $device = Device::findOrFail($request->input('device_id'));
