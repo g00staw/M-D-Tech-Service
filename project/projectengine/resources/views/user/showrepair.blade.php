@@ -63,19 +63,32 @@
             <div class="container d-flex flex-column align-items-center border border-radius p-3">
                 <hr>
                 <h2>Opłać naprawę:</h2>
-                @if($payment->status != 'completed')
+                @if($payment && $payment->status != 'completed')
+
                     <form method="POST" action="{{ route('userdashboard.repair.payment', ['id' => $payment->id]) }}">
+
                         @csrf
+
                         <input type="hidden" name="repair_id" value="{{ $repair->id }}">
+
                         <div class="form-group">
+
                             <label for="amount">Kwota naprawy: {{ $payment->amount }} [PLN]</label>
+
                         </div>
+
                         <div class="form-group">
+
                             <label for="payment_method">Metoda płatności</label>
+
                             <select class="form-control" id="payment_method" name="payment_method" required>
+
                                 <option value="credit_card">Karta kredytowa</option>
+
                                 <option value="paypal">PayPal</option>
+
                                 <option value="cash">Gotówka</option>
+
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Zapłać</button>

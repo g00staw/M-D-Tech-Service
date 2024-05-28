@@ -71,8 +71,8 @@ class Employee extends Authenticatable
         $employee = Employee::findOrFail($employeeId);
 
         $completedRepairs = $employee->repairs()
-            ->where('status', '=', 'ukończono')
-            ->where('completion_date', '>', Carbon::now())  // Zmień na swoją datę
+            ->where('status', 'ukończono')
+            ->where('completion_date', '>', $endDate) 
             ->count();
 
         return $completedRepairs;
