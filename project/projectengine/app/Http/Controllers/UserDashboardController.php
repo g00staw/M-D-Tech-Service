@@ -23,7 +23,6 @@ class UserDashboardController extends Controller
 {
     public function showDashboard()
     {
-        // Pobierz wszystkie oceny wraz z danymi użytkowników i napraw
         $ratings = Rating::with('user', 'repair')->paginate(5);
 
         $services = Techservice::all();
@@ -86,18 +85,15 @@ class UserDashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Check if the user has devices
         if ($user->devices->isEmpty()) {
             return back()->with('error', 'Nie masz żadnych urządzeń, ani napraw które można wyświetlić.');
         }
 
-        // Check if the user has repairs
         if ($user->repairs->isEmpty()) {
             return view('user.repairs', ['user' => $user, 'repairs' => null])
                 ->with('info', 'Nie masz żadnych napraw.');
         }
 
-        // Retrieve repairs if they exist
         $repairs = $user->repairs()->with('device')->paginate(10);
 
         return view('user.repairs', ['user' => $user, 'repairs' => $repairs]);

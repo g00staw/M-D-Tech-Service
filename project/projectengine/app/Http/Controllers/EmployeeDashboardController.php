@@ -58,7 +58,6 @@ class EmployeeDashboardController extends Controller
 
         $employeeID = Auth::guard('employee')->user()->id;
 
-        // Sprawdź, czy naprawa o podanym repair_id istnieje w bazie danych
         $repair = Repair::find($request->input('repair_id'));
         if (!$repair) {
             return redirect()->route('employeedashboard')->withErrors(['repair_id' => 'Niepoprawne ID naprawy']);

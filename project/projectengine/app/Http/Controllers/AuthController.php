@@ -28,17 +28,15 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // Spróbuj zalogować się jako admin
+
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admindashboard');
         }
 
-        // Spróbuj zalogować się jako pracownik
         if (Auth::guard('employee')->attempt($credentials)) {
             return redirect()->route('employeedashboard');
         }
 
-        // Spróbuj zalogować się jako użytkownik
         if (Auth::guard('web')->attempt($credentials)) {
             return redirect()->route('userdashboard');
         }
@@ -69,7 +67,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        // Sprawdź, czy e-mail istnieje w tabelach users, admins lub employees
+
         if (
             User::where('email', $request->email)->exists() ||
             Admin::where('email', $request->email)->exists() ||
@@ -78,7 +76,6 @@ class AuthController extends Controller
             return redirect()->route('registerForm')->with('error', 'Email jest w użyciu.');
         }
 
-        // Utwórz nowego użytkownika
         User::create([
             'name' => $request->name,
             'email' => $request->email,

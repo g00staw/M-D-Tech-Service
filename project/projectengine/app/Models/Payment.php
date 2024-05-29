@@ -87,11 +87,6 @@ class Payment extends Model
             ->sum('amount');
     }
 
-    /**
-     * Compare the revenue from the last 7 days with the revenue from the previous 2 weeks.
-     *
-     * @return array
-     */
     public static function compareRevenueLast7DaysWithPrevious2Weeks()
     {
         $last7Days = Carbon::now()->subDays(7);
