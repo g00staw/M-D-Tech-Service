@@ -54,6 +54,16 @@
       </ul>
     </div>
 
+    <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Utwórz nowe usługi</h5>
+                <p class="card-text">Kliknij aby przejść do kreatora usług.</p>
+
+                <a href="{{route('admindashboard.addform.service')}}" class="btn btn-primary">Przejdź</a>
+
+            </div>
+      </div>
+
     <div class="container mt-5 d-flex flex-column  border border-radius">
       <h2>Edytuj usługę</h2>
       <form id="deviceForm" method="POST" action="{{ route('admindashboard.edit.service') }}">
@@ -91,7 +101,9 @@
         <button type="submit" class="btn btn-primary">Zatwierdź zmiany</button>
     </div>
     </form>
+    
     </div>
+
 
       <script>
         function fillForm() {
@@ -106,6 +118,8 @@
       </script>
 
     </div>
+
+
 
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

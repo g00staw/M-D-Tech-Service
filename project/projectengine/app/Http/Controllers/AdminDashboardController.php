@@ -114,27 +114,27 @@ class AdminDashboardController extends Controller
         if (!Auth::guard('admin')->check()) {
             return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
         }
-    
+
         $request->validate([
             'password' => 'required|string',
         ]);
-    
+
         if (!Hash::check($request->input('password'), Auth::guard('admin')->user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Niepoprawne hasło']);
         }
-    
+
         // Sprawdź, czy pracownik nie jest aktualnie zaangażowany w naprawę
         $activeRepair = Repair::where('employee_id', $id)->where('status', '!=', 'ukończono')->first();
         if ($activeRepair) {
             return back()->with(['error' => 'Pracownik jest aktualnie zaangażowany w naprawę i nie może być usunięty.']);
         }
-    
+
         $employee = Employee::findOrFail($id);
         $employee->delete();
-    
+
         return redirect()->route('admindashboard.employees')->with('success', 'Pracownik został pomyślnie usunięty.');
     }
-    
+
     public function displayServices()
     {
         $techservices = Techservice::paginate(10, ['*'], 'services_page');
@@ -255,7 +255,6 @@ class AdminDashboardController extends Controller
             return redirect()->route('login')->withErrors(['msg' => 'Musisz być zalogowany jako admin, aby usunąć pracownika.']);
         }
 
-
         $request->validate([
             'password' => 'required|string',
         ]);
@@ -264,16 +263,33 @@ class AdminDashboardController extends Controller
             return redirect()->route('admindashboard.devices')->with(['error' => 'Niepoprawne hasło']);
         }
 
-        $activeRepair = Repair::where('device_id', $request->input('device_id'))->where('status', '!=', 'ukończono')->first();
+        $deviceId = $request->input('device_id');
+
+        $activeRepair = Repair::where('device_id', $deviceId)->where('status', '!=', 'ukończono')->first();
         if ($activeRepair) {
             return redirect()->route('admindashboard.devices')->with(['error' => 'Urządzenie jest aktualnie naprawiane i nie może być usunięte.']);
         }
 
-        $device = Device::findOrFail($request->input('device_id'));
+        $completedRepair = Repair::where('device_id', $deviceId)->where('status', 'ukończono')->first();
+        if ($completedRepair) {
+            $payment = Payment::where('repair_id', $completedRepair->id)->where('status', 'completed')->first();
+            if (!$payment) {
+                return redirect()->route('admindashboard.devices')->with(['error' => 'Naprawa urządzenia została ukończona, ale nie jest opłacona. Urządzenie nie może być usunięte.']);
+            }
+        }
+
+        $device = Device::findOrFail($deviceId);
+
+        $device->user_id = null;
+        $device->save();
+
+        Repair::where('device_id', $device->id)->where('status', 'ukończono')->update(['user_id' => null]);
+
         $device->delete();
 
         return redirect()->route('admindashboard.devices')->with('success', 'Urządzenie zostało pomyślnie usunięte.');
     }
+
 
     public function showRepairs()
     {
@@ -307,14 +323,16 @@ class AdminDashboardController extends Controller
 
 
 
-        return view('admin.finanse', ['payments' => $payments, 
-                'data' => $data,
-                'data2' => $data2,
-                'hasData' => $hasData,
-                'hasData2' => $hasData2,
-                'lastWeekIncome' => $revenueLast7Days,
-                'comparison' => $revenueComparison,
-                'lastMonthIncome' => $revenueLast30Days,]);
+        return view('admin.finanse', [
+            'payments' => $payments,
+            'data' => $data,
+            'data2' => $data2,
+            'hasData' => $hasData,
+            'hasData2' => $hasData2,
+            'lastWeekIncome' => $revenueLast7Days,
+            'comparison' => $revenueComparison,
+            'lastMonthIncome' => $revenueLast30Days,
+        ]);
     }
 
     public function showProfile(Request $request)
@@ -329,7 +347,7 @@ class AdminDashboardController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user =  Auth::guard('admin')->user();
+        $user = Auth::guard('admin')->user();
 
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'Obecne hasło jest nieprawidłowe']);
@@ -356,7 +374,7 @@ class AdminDashboardController extends Controller
         }
 
 
-        $user =  Auth::guard('admin')->user();
+        $user = Auth::guard('admin')->user();
         $user->email = $request->email;
         $user->save();
 
@@ -369,7 +387,7 @@ class AdminDashboardController extends Controller
             'profile_photo' => ['nullable', 'image'],
         ]);
 
-        $user =  Auth::guard('admin')->user();
+        $user = Auth::guard('admin')->user();
 
         if ($request->hasFile('profile_photo')) {
             $path = $request->file('profile_photo')->store('profile_photos', 'public');

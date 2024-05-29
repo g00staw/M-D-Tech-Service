@@ -16,7 +16,7 @@
 
     <div class="container text-center">
         <div id="start">
-            <div id="carouselExampleCaptions" class="carousel slide">
+            <div id="carouselExampleCaptions" class="carousel slide d-flex pt-3">
                 <div class="carousel-inner">
                     <div class="carousel-item d-flex justify-content-center align-items-center active">
                         <img src="/src/logowhite.png" class="d-block" alt="...">

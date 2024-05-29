@@ -273,6 +273,8 @@ class UserDashboardController extends Controller
         return back()->with('success', 'E-mail został pomyślnie zmieniony');
     }
 
+
+
     public function updatePhoto(Request $request)
     {
         $request->validate([
@@ -289,6 +291,15 @@ class UserDashboardController extends Controller
         $user->save();
 
         return back()->with('success', 'Profil został pomyślnie zaktualizowany');
+    }
+
+
+    public function showPaymentHistory(){
+        $user = Auth::user();
+        $pendingPaymentsCount = Payment::where('status', 'pending')->count();
+        $payments = Payment::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        return view('user.payments', ['payments' => $payments, 'pendingPaymentsCount' => $pendingPaymentsCount]);
     }
 
 

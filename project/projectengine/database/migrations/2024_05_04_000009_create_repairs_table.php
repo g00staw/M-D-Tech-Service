@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('repairs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('device_id')->constrained();
+            $table->foreignId('device_id')->nullable()->constrained();
             $table->foreignId('employee_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
             $table->enum('status', ['zgłoszone', 'przyjęte', 'w trakcie realizacji', 'oczekiwanie na części', 'ukończono'])->nullable();

@@ -55,7 +55,7 @@
                           action="{{ route('admindashboard.employee.updatesalary', ['id' => $employee->id]) }}"
                           method="POST">
                           @csrf
-                          <!-- Ukryte pole do przechowywania ID pracownika -->
+                         
                           <input type="hidden" name="employee_id" value="{{ $employee->id }}">
 
                           <label for="salary" class="m-2 form-label">Nowa pensja:</label><br>

@@ -31,7 +31,6 @@
 @endif
 
 
-    <!-- Toggle button -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars text-light"></i>
@@ -56,7 +55,7 @@
         <div>
         <i class="far fa-envelope fa-lg mb-1"></i>
         <img src="{{ asset('src/responsive.png') }}" height="30">
-        {{-- <span class="badge rounded-pill badge-notification bg-info">11</span> --}}
+
         </div>
         Urządzenia
       </a>
@@ -66,9 +65,19 @@
         <div>
         <i class="far fa-envelope fa-lg mb-1"></i>
         <img src="{{ asset('src/settings.png') }}" height="30">
-        {{-- <span class="badge rounded-pill badge-notification bg-warning">11</span> --}}
+
         </div>
         Naprawy
+      </a>
+      </li>
+      <li class="nav-item text-center mx-2 mx-lg-1 btn">
+      <a class="nav-link" href="{{ route('userdashboard.payments') }}">
+        <div>
+        <i class="far fa-envelope fa-lg mb-1"></i>
+        <img src="{{ asset('src/bag.png') }}" height="30">
+
+        </div>
+        Płatności
       </a>
       </li>
     @endif
@@ -83,7 +92,8 @@
       </a>
       </li>
       <li class="nav-item text-center mx-2 mx-lg-1 btn">
-      <a class="nav-link" href="{{ route('admindashboard.devices') }}">
+      <a class="nav-link" href="{{ route('admindashboard.devices')}}">
+
         <div>
         <i class="far fa-envelope fa-lg mb-1"></i>
         <img src="{{ asset('src/responsive.png') }}" height="30">

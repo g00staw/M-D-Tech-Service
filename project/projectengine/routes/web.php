@@ -42,6 +42,7 @@ Route::controller(UserDashboardController::class)->group(function(){
     Route::post('/userdashboard/profile/change-password', 'updatePassword')->name('userdashboard.profile.psschange')->middleware('auth');
     Route::post('/userdashboard/profile/change-email', 'updateEmail')->name('userdashboard.profile.emchange')->middleware('auth');
     Route::post('/userdashboard/profile/change-photo', 'updatePhoto')->name('userdashboard.profile.phchange')->middleware('auth');
+    Route::get('/userdashboard/showPayments', 'showPaymentHistory')->name('userdashboard.payments')->middleware('auth');
 });
 
 Route::controller(AdminDashboardController::class)->group(function(){

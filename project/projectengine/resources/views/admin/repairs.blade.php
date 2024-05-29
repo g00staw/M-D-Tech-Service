@@ -41,10 +41,17 @@
                   @foreach ( $repairs as $repair )
                   <tr>
                         <td>{{$repair->repair_title}}</td>
+                        @if($repair->device === null)
+                          <td>Brak danych / urządzenie zostało usunięte</td>
+                          <td>Brak danych / urządzenie zostało usunięte</td>
+                          <td>Brak danych / urządzenie zostało usunięte</td>
+                          <td>Brak danych / urządzenie zostało usunięte</td>
+                        @else
                         <td>{{$repair->device->type}}</td>
                         <td>{{$repair->device->brand}}</td>
                         <td>{{$repair->device->model}}</td>
                         <td>{{$repair->device->serial_number}}</td>
+                        @endif
                         <td>{{$repair->status}}</td>
                         <td>{{$repair->report_date}}</td>
                         <td>{{$repair->completion_date}}</td>
