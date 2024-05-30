@@ -20,22 +20,22 @@
     <h1>Twoje urządzenia</h1>
     <div class="p-3 d-flex flex-column align-items-center">
       @if(session('error'))
-    <div class="alert alert-danger">
+      <div class="alert alert-danger">
       {{ session('error') }}
-    </div>
-  @endif
+      </div>
+    @endif
 
       @if(session('info'))
-    <div class="alert alert-info">
+      <div class="alert alert-info">
       {{ session('info') }}
-    </div>
-  @endif
+      </div>
+    @endif
 
       @if(session('success'))
-    <div class="alert alert-success">
+      <div class="alert alert-success">
       {{ session('success') }}
-    </div>
-  @endif
+      </div>
+    @endif
       <div class="card" style="max-width: 50rem;">
         <div class="card-header">
           Dodaj urządzenie
@@ -47,42 +47,47 @@
         </div>
       </div>
       @if ($devices->isEmpty())
-    <h3>Brak urządzeń do wyświetlenia</h3>
-  @else
-  <div class="table-responsive m-3">
-    <table class="table table-striped table-hover">
-    <thead>
+      <h3>Brak urządzeń do wyświetlenia</h3>
+    @else
+      <div class="table-responsive m-3">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th class="m-3">Typ urządzenia</th>
+          <th class="m-3">Marka</th>
+          <th class="m-3">Model</th>
+          <th class="m-3">Numer seryjny</th>
+          <th class="m-3">Data zakupu</th>
+          <th class="m-3">Koniec gwarancji</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($devices as $device)
       <tr>
-      <th class="m-3">Typ urządzenia</th>
-      <th class="m-3">Marka</th>
-      <th class="m-3">Model</th>
-      <th class="m-3">Numer seryjny</th>
-      <th class="m-3">Data zakupu</th>
-      <th class="m-3">Koniec gwarancji</th>
-      <th></th>
+        <td>{{ $device->type }}</td>
+        <td>{{ $device->brand }}</td>
+        <td>{{ $device->model }}</td>
+        <td>{{ $device->serial_number }}</td>
+        <td>{{ $device->purchase_date }}</td>
+        <td>{{ $device->end_of_warranty }}</td>
+        <td><a class="text-primary" href="{{route('userdashboard.device', $device->id)}}">Zobacz więcej</a></td>
       </tr>
-    </thead>
-    <tbody>
-      @foreach ($devices as $device)
-    <tr>
-    <td>{{ $device->type }}</td>
-    <td>{{ $device->brand }}</td>
-    <td>{{ $device->model }}</td>
-    <td>{{ $device->serial_number }}</td>
-    <td>{{ $device->purchase_date }}</td>
-    <td>{{ $device->end_of_warranty }}</td>
-    <td><a class="text-primary" href="{{route('userdashboard.device', $device->id)}}">Zobacz więcej</a></td>
-    </tr>
-  @endforeach
-    </tbody>
-    </table>
+    @endforeach
+        </tbody>
+      </table>
 
-  </div>
-@endif
+      </div>
+    @endif
     </div>
-    <!-- Linki do paginacji -->
-    <div class="d-flex justify-content-center">
-      {{ $devices->links() }}
+    <div class="container mt-5">
+      <ul class="pagination pagination-sm justify-content-center">
+        @for ($i = 1; $i <= $devices->lastPage(); $i++)
+      <li class="page-item {{ ($devices->currentPage() == $i) ? 'active' : '' }}">
+        <a class="page-link" href="{{ $devices->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+      </ul>
     </div>
     @include('shared.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -41,31 +41,42 @@
                 @if ($payments->isEmpty())
                     <h3>Brak płatności do wyświetlenia</h3>
                 @else
-                    <div class="table-responsive m-3">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Kwota</th>
-                                    <th>Status</th>
-                                    <th>Metoda płatności</th>
-                                    <th>Data płatności</th>
-                                    <th>Data utworzenia</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($payments as $payment)
+                    <div>
+                        <div class="table-responsive m-3 flex">
+                            <table class="table table-striped table-hover">
+                                <thead>
                                     <tr>
-                                        <td>{{ $payment->id }}</td>
-                                        <td>{{ $payment->amount }}</td>
-                                        <td>{{ $payment->status }}</td>
-                                        <td>{{ $payment->payment_method }}</td>
-                                        <td>{{ $payment->payment_date }}</td>
-                                        <td>{{ $payment->created_at }}</td>
+                                        <th>ID</th>
+                                        <th>Kwota</th>
+                                        <th>Status</th>
+                                        <th>Metoda płatności</th>
+                                        <th>Data płatności</th>
+                                        <th>Data utworzenia</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($payments as $payment)
+                                        <tr>
+                                            <td>{{ $payment->id }}</td>
+                                            <td>{{ $payment->amount }}</td>
+                                            <td>{{ $payment->status }}</td>
+                                            <td>{{ $payment->payment_method }}</td>
+                                            <td>{{ $payment->payment_date }}</td>
+                                            <td>{{ $payment->created_at }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="container mt-5">
+                            <ul class="pagination pagination-sm justify-content-center">
+                                @for ($i = 1; $i <= $payments->lastPage(); $i++)
+                                    <li class="page-item {{ ($payments->currentPage() == $i) ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $payments->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                            </ul>
+                        </div>
                     </div>
                 @endif
             </div>
@@ -74,8 +85,8 @@
             <div class="card-body">
                 <h5 class="card-title">Aktywne płatności</h5>
                 <p class="card-text">Liczba płatności oczekujących na zatwierdzenie: {{ $pendingPaymentsCount }}</p>
-                @if ($pendingPaymentsCount>0)
-                <a href="{{route('userdashboard.repairs')}}" class="btn btn-primary">Przejdź</a>
+                @if ($pendingPaymentsCount > 0)
+                    <a href="{{route('userdashboard.repairs')}}" class="btn btn-primary">Przejdź</a>
                 @endif
             </div>
         </div>

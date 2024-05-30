@@ -23,6 +23,7 @@
       <h4 class="text-primary">{{$numberOfActiveRepairs}}</h4>
     </div>
 
+
     <div class="container mt-5 d-flex flex-column">
       <h2>Lista oczekujących zgłoszeń</h2>
       <div class="table-responsive">
@@ -40,35 +41,35 @@
           <tbody>
             @foreach ($repairs as $repair)
         <tr>
-        <td> {{ $repair->id }}</td>
-        <td> {{ $repair->repair_title }}</td>
-        <td> {{ $repair->user_notes }}</td>
-        <td> {{ $repair->report_date }}</td>
-        <td> {{ $repair->device->type }}</td>
-        <td> {{ $repair->device->brand }} {{ $repair->device->model }}</td>
+          <td> {{ $repair->id }}</td>
+          <td> {{ $repair->repair_title }}</td>
+          <td> {{ $repair->user_notes }}</td>
+          <td> {{ $repair->report_date }}</td>
+          <td> {{ $repair->device->type }}</td>
+          <td> {{ $repair->device->brand }} {{ $repair->device->model }}</td>
         </tr>
       @endforeach
           </tbody>
         </table>
         <ul class="pagination pagination-sm justify-content-center">
           @for ($i = 1; $i <= $repairs->lastPage(); $i++)
-      <li class="page-item {{ ($repairs->currentPage() == $i) ? 'active' : '' }}">
+        <li class="page-item {{ ($repairs->currentPage() == $i) ? 'active' : '' }}">
         <a class="page-link" href="{{ $repairs->url($i) }}">{{ $i }}</a>
-      </li>
-    @endfor
+        </li>
+      @endfor
         </ul>
       </div>
 
       @if (session('error'))
-    <div class="alert alert-danger">
+      <div class="alert alert-danger">
       {{ session('error') }}
-    </div>
-  @endif
+      </div>
+    @endif
       @if (session('success'))
-    <div class="alert alert-success">
+      <div class="alert alert-success">
       {{ session('success') }}
-    </div>
-  @endif
+      </div>
+    @endif
 
       <div class="container mt-5 d-flex flex-column">
         <h2>Lista pracowników</h2>
@@ -87,53 +88,62 @@
             </thead>
             <tbody>
               @foreach ($employees as $employee)
-        <tr>
+          <tr>
           <td>{{ $employee->id }}</td>
           <td>{{ $employee->name }}</td>
           <td>{{ $employee->email }}</td>
           <td>{{ $employee->activeRepairsCount }}</td>
           <td>{{ $employee->completedRepairsThisWeek }}</td>
           <td>
-          <div class="btn-group">
+            <div class="btn-group">
             <button type="button" class="btn btn-sm btn-warning dropdown-toggle m-1" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Przypisz zgłoszenie
+              aria-expanded="false">
+              Przypisz zgłoszenie
             </button>
             <div class="dropdown-menu p-1">
-            <form id="assignRepairForm"
+              <form id="assignRepairForm"
               action="{{ route('admindashboard.employees.assignRepairToEmployee') }}" method="POST">
               @csrf
               <input type="hidden" name="employee_id" value="{{ $employee->id }}">
 
               <select id="repair_id" name="repair_id" class="form-control text-sm" style="width: 12rem;">
-              @foreach($repairs as $repair)
-        <option class="text-sm" value="{{ $repair->id }}">
+                @foreach($repairs as $repair)
+          <option class="text-sm" value="{{ $repair->id }}">
           <p class="text-sm">ID: {{ $repair->id }}, {{ $repair->device->brand }}
-          {{ $repair->device->model }}</p>
-        </option>
-      @endforeach
+            {{ $repair->device->model }}
+          </p>
+          </option>
+        @endforeach
               </select>
               <div class="dropdown-divider"></div>
               <button type="submit" class="btn m-2 btn-warning">Przypisz</button>
-            </form>
+              </form>
             </div>
-          </div>
+            </div>
           </td>
           <td><a href=" {{ route('admindashboard.employeeinfo', ['id' => $employee->id]) }} "
             class="btn text-center d-flex btn-primary btn-sm">Zobacz więcej</a></td>
-        </tr>
-      @endforeach
+          </tr>
+        @endforeach
             </tbody>
           </table>
           <ul class="pagination pagination-sm justify-content-center">
             @for ($i = 1; $i <= $employees->lastPage(); $i++)
         <li class="page-item {{ ($employees->currentPage() == $i) ? 'active' : '' }}">
-        <a class="page-link" href="{{ $employees->url($i) }}">{{ $i }}</a>
+          <a class="page-link" href="{{ $employees->url($i) }}">{{ $i }}</a>
         </li>
       @endfor
           </ul>
         </div>
-
+        <div class="d-flex justify-content-center">
+          <div class="card m-3 custom-card shadow" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Dodaj pracownika</h5>
+              <p class="card-text">Przejdź do formularza dodawania pracownika.</p>
+              <a href="{{ route('admindashboard.add.employee') }}" class="btn btn-primary">Przejdź</a>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>

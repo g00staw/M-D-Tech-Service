@@ -63,38 +63,41 @@
             <div class="container d-flex flex-column align-items-center border border-radius p-3">
                 <hr>
                 <h2>Opłać naprawę:</h2>
-                @if($payment && $payment->status != 'completed')
+                <div class="container d-flex justify-content-center">
+                    @if($payment && $payment->status != 'completed')
 
-                    <form method="POST" action="{{ route('userdashboard.repair.payment', ['id' => $payment->id]) }}">
+                        <form class="d-flex flex-column" method="POST" action="{{ route('userdashboard.repair.payment', ['id' => $payment->id]) }}">
 
-                        @csrf
+                            @csrf
 
-                        <input type="hidden" name="repair_id" value="{{ $repair->id }}">
+                            <input type="hidden" name="repair_id" value="{{ $repair->id }}">
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <label for="amount">Kwota naprawy: {{ $payment->amount }} [PLN]</label>
+                                <label for="amount">Kwota naprawy: {{ $payment->amount }} [PLN]</label>
 
-                        </div>
+                            </div>
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <label for="payment_method">Metoda płatności</label>
+                                <label for="payment_method">Metoda płatności</label>
 
-                            <select class="form-control" id="payment_method" name="payment_method" required>
+                                <select class="form-control" id="payment_method" name="payment_method" required>
 
-                                <option value="credit_card">Karta kredytowa</option>
+                                    <option value="credit_card">Karta kredytowa</option>
 
-                                <option value="paypal">PayPal</option>
+                                    <option value="paypal">PayPal</option>
 
-                                <option value="cash">Gotówka</option>
+                                    <option value="cash">Gotówka</option>
 
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Zapłać</button>
-                    </form>
-                @endif
-
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Zapłać</button>
+                        </form>
+                    @elseif ($payment && $payment->status == 'completed')
+                        <strong class="text-success">Naprawa została opłacona</strong>
+                    @endif
+                </div>
                 <hr>
             </div>
         </div>

@@ -17,6 +17,7 @@
     @include('shared.navbar')
 
     <div class="container-fluid d-flex flex-column align-items-center m-3">
+        <h1>Dodaj pracownika</h1>
         <form method="POST" action="{{ route('admindashboard.add.employee') }}">
             @csrf
             <div class="mb-3">

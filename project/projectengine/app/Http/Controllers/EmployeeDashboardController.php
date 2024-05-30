@@ -106,37 +106,38 @@ class EmployeeDashboardController extends Controller
         return redirect()->back()->with('success', 'Notatka została pomyślnie dodana.');
     }
 
-    public function addNewPayment(Request $request, $repairId){
-
+    public function addNewPayment(Request $request, $repairId)
+    {
         $request->validate([
             'final_price' => 'required|numeric|between:0,9999999999.99',
+            'warranty_renewal' => 'required|integer|between:0,5',
         ]);
-
+    
+        $newWarranty = (int) $request->input('warranty_renewal'); // Explicitly cast to integer
+    
         $repair = Repair::findOrFail($repairId);
         $repair->status = 'ukończono';
         $repair->completion_date = today();
         $repair->save();
-
+    
         $deviceID = $repair->device_id;
         $device = Device::findOrFail($deviceID);
         $device->is_registered = true;
+        $device->end_of_warranty = today()->addYears($newWarranty); // Now $newWarranty is an integer
         $device->save();
-        
+    
         $payment = new Payment;
         $payment->user_id = $request->input('user_id');
-        $payment->repair_id =$repairId;
+        $payment->repair_id = $repairId;
         $payment->amount = $request->input('final_price');
         $payment->status = 'pending';
         $payment->payment_method = null;
         $payment->payment_date = null;
         $payment->save();
-
-        
-
-
-
+    
         return redirect()->route('employeedashboard')->with('success', 'Pomyślnie zakończono naprawę.');
     }
+    
 
 
     public function showProfile(Request $request)

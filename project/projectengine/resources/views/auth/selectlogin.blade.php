@@ -27,6 +27,16 @@
             <div class="row">
                 <section class="vh-100">
                     <div class="container-fluid border-radius h-custom bg-white p-5 bg-opacity-50">
+                    @if (session('error'))
+                      <div class="alert alert-danger">
+                        {{ session('error') }}
+                      </div>
+                    @endif
+                      @if (session('success'))
+                      <div class="alert alert-success">
+                        {{ session('success') }}
+                      </div>
+                    @endif
                         <div class="row d-flex justify-content-center align-items-center h-100">
                             <div class="col-md-9 col-lg-6 col-xl-5">
                                 <img src="/src/name.png" class="img-fluid w-50" alt="Sample image">
@@ -35,7 +45,6 @@
                             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                                 <form method="POST" action="{{ route('login.authenticate') }}">
                                     @csrf
-                                    <input type="hidden" name="guard" value="employee">
                                     <!-- Email input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <input id="email" name="email" type="text" class="form-control form-control-lg bg-white bg-opacity-75 @if ($errors->first('email')) is-invalid @endif" value="{{ old('email') }}"
@@ -46,7 +55,7 @@
 
                                     <!-- Password input -->
                                     <div data-mdb-input-init class="form-outline mb-3">
-                                        <input id="password" name="password" type="password" class="bg-white bg-opacity-75 form-control @if ($errors->first('password')) is-invalid @endif"
+                                        <input id="password" name="password" type="password" class="bg-white bg-opacity-75 form-control @if ($errors->first('password')) is-invalid @endif" value="{{ old('prassword') }}"
                                             placeholder="Podaj hasło" />
                                             <div class="invalid-feedback">Nieprawidłowe hasło!</div>
                                         <label class="form-label" for="password" :value="__('Password')">Hasło</label>

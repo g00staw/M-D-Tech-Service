@@ -13,9 +13,9 @@ class Payment extends Model
 
     protected $fillable = ['client_id', 'repair_id', 'amount', 'payment_date', 'status', 'payment_method'];
 
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 
     public function repair()

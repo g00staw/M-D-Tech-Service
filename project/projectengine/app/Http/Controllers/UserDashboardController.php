@@ -104,12 +104,12 @@ class UserDashboardController extends Controller
     {
         $devices = auth()->user()->devices->filter(function ($device) {
 
-            $ongoingRepairs = $device->repairs->where('status', '!=', 'completed');
+            $ongoingRepairs = $device->repairs->where('status', '!=', 'ukończono');
             return $ongoingRepairs->isEmpty();
         });
 
         if ($devices->isEmpty()) {
-            return back()->with('error', 'Nie możesz stworzyć nowego zgłoszenia, ponieważ Twoje urządzenie jest aktualnie w naprawie.');
+            return redirect()->back()->with('error', 'Nie możesz stworzyć nowego zgłoszenia, ponieważ Twoje urządzenie jest aktualnie w naprawie.');
         }
 
 
@@ -293,7 +293,9 @@ class UserDashboardController extends Controller
     public function showPaymentHistory(){
         $user = Auth::user();
         $pendingPaymentsCount = Payment::where('status', 'pending')->count();
-        $payments = Payment::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        $payments = Payment::where('user_id', $user->id)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10);
 
         return view('user.payments', ['payments' => $payments, 'pendingPaymentsCount' => $pendingPaymentsCount]);
     }

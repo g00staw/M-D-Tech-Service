@@ -19,6 +19,16 @@
   <div class="container-fluid d-flex flex-column align-items-center m-3">
     <h1>Historia napraw</h1>
     <div class="custom-container p-3 d-flex flex-column align-items-center">
+    @if (session('error'))
+      <div class="alert alert-danger">
+      {{ session('error') }}
+      </div>
+    @endif
+      @if (session('success'))
+      <div class="alert alert-success">
+      {{ session('success') }}
+      </div>
+    @endif
         <div class="card" style="max-width: 50rem;">
               <div class="card-header">
                 Dodaj zgłoszenie naprawy
@@ -70,9 +80,14 @@
       </div>
       @endif
     </div>
-    <!-- Linki do paginacji -->
-    <div class="d-flex justify-content-center">
-
+    <div class="container mt-5">
+      <ul class="pagination pagination-sm justify-content-center">
+        @for ($i = 1; $i <= $repairs->lastPage(); $i++)
+      <li class="page-item {{ ($repairs->currentPage() == $i) ? 'active' : '' }}">
+        <a class="page-link" href="{{ $repairs->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+      </ul>
     </div>
     @include('shared.footer')
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -122,6 +122,46 @@ class DatabaseSeeder extends Seeder
                 'type' => 'smartphone',
                 'user_id' => 3,
             ],
+            [
+                'brand' => 'Huawei',
+                'model' => 'P50',
+                'serial_number' => '9943412888',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2022-05-07',
+                'is_registered' => false,
+                'type' => 'smartphone',
+                'user_id' => 3,
+            ],
+            [
+                'brand' => 'Google',
+                'model' => 'Pixel 8',
+                'serial_number' => '3221412888',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2022-05-07',
+                'is_registered' => false,
+                'type' => 'smartphone',
+                'user_id' => 2,
+            ],
+            [
+                'brand' => 'Realme',
+                'model' => '12 Pro',
+                'serial_number' => '3276512876',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2022-05-07',
+                'is_registered' => false,
+                'type' => 'smartphone',
+                'user_id' => 1,
+            ],
+            [
+                'brand' => 'Google',
+                'model' => 'Pixel 8 Pro',
+                'serial_number' => '1237412888',
+                'purchase_date' => '2024-05-07',
+                'end_of_warranty' => '2022-05-07',
+                'is_registered' => false,
+                'type' => 'smartphone',
+                'user_id' => 1,
+            ],
  
         ]);
 
@@ -150,6 +190,33 @@ class DatabaseSeeder extends Seeder
                 'repair_title' => 'Wyświetlacz nie reaguje na dotyk'
             ],
             [
+                'device_id' => '6',
+                'employee_id' => '1',
+                'user_id' => '3',
+                'report_date' => '2024-5-29',
+                'user_notes' => 'Rozwalona obudowa',
+                'status' => 'ukończono',
+                'repair_title' => 'Plecki odpadają od telefonu, wgnieciona ramka.'
+            ],
+            [
+                'device_id' => '7',
+                'employee_id' => '1',
+                'user_id' => '2',
+                'report_date' => '2024-5-25',
+                'user_notes' => 'Zniszczony ekran',
+                'status' => 'ukończono',
+                'repair_title' => 'Ekran jest cały stłuczony, nie reaguje na dotyk.'
+            ],
+            [
+                'device_id' => '8',
+                'employee_id' => '1',
+                'user_id' => '1',
+                'report_date' => '2024-5-25',
+                'user_notes' => 'Zniszczony ekran',
+                'status' => 'ukończono',
+                'repair_title' => 'Ekran jest cały stłuczony, nie reaguje na dotyk.'
+            ],
+            [
                 'device_id' => '2',
                 'employee_id' => '1',
                 'user_id' => '2',
@@ -167,13 +234,18 @@ class DatabaseSeeder extends Seeder
                 'status' => 'ukończono',
                 'repair_title' => 'Telefon wyłącza się bo wyjęciu ładowarki'
             ],
+            [
+                'device_id' => '9',
+                'user_id' => '1',
+                'employee_id' => null,
+                'report_date' => '2024-5-25',
+                'user_notes' => 'Rozbity ekran',
+                'status' => 'zgłoszone',
+                'repair_title' => 'Wyświetlacz nie reaguje na dotyk'
+            ],
 
         ]);
 
-        Rating::insert([
-        
-
-        ]);
 
         Techservice::insert([
             [
@@ -225,8 +297,51 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Payment::insert([
-        
+            [    
+                'user_id' => '3',
+                'repair_id' => '2',
+                'amount' => '560.00',
+                'status' => 'completed',
+                'payment_date' => '2024-5-29',
+                'payment_method' => 'credit_card',
+            ],
+            [    
+                'user_id' => '2',
+                'repair_id' => '3',
+                'amount' => '720.00',
+                'status' => 'completed',
+                'payment_date' => '2024-5-28',
+                'payment_method' => 'credit_card',
+            ],
+            [    
+                'user_id' => '1',
+                'repair_id' => '3',
+                'amount' => '440.00',
+                'status' => 'completed',
+                'payment_date' => '2024-5-27',
+                'payment_method' => 'credit_card',
+            ],
+
         ]);
+
+        Rating::insert([
+            [            
+                'user_id' => '3',
+                'repair_id' => '2',
+                'rating' => '5',
+                'review' => 'Super obsługa!'
+            ],
+            [            
+                'user_id' => '2',
+                'repair_id' => '3',
+                'rating' => '4',
+                'review' => 'Jest ok.'
+            ],
+
+
+
+        ]);
+
 
 
     }

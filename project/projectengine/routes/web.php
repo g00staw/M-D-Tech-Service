@@ -7,10 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserDashboardController;
 
-// Strona główna
-Route::get('/', function () {
-    return view('auth.selectlogin');
-});
+
 
 Route::get('/user-dashboard', function () {
     return view('user.clientdashboard');
@@ -25,7 +22,7 @@ Route::get('/employee-dashboard', function () {
 })->name('employeedashboard');
 
 Route::controller(UserDashboardController::class)->group(function(){
-    Route::get('/userdashboard','showDashboard')->name('userdashboard');
+    Route::get('/','showDashboard')->name('userdashboard');
     Route::get('/userdashboard/devices', 'showUserDevices')->name('userdashboard.devices')->middleware('auth');
     Route::get('/userdashboard/device/add','addUserDevice')->name('userdashboard.add.device')->middleware('auth');
     Route::post('/userdashboard/device/add/from-service', 'addDeviceToUser')->name('userdashboard.add.device.fs')->middleware('auth');

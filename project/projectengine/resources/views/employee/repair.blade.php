@@ -99,6 +99,18 @@
                     <input type="number" id="basePrice" class="form-control" min="0" step="0.01">
                 </div>
                 <div class="form-group">
+                    <label for="basePrice">O ile lat ma zostać odnowiona gwarancja:</label>
+                    <select name="warranty_renewal" class="form-control">
+                            <option value="1">1 rok</option>
+                            <option value="2">2 lata</option>
+                            <option value="3">3 lata</option>
+                            <option value="4">5 lata</option>
+                            <option value="5">5 lat</option>
+                            <option value="0">Nie podlega odnowieniu</option>
+                            <hr>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="deviceRegistered">Czy urządzenie jest zarejestrowane?</label>
                     <input type="text" id="deviceRegistered" class="form-control"
                         value="{{ $device->is_registered ? 'Tak' : 'Nie' }}" readonly>

@@ -17,6 +17,7 @@ use App\Models\Admin;
 use App\Models\Device;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\UniqueEmail;
 
 
 class AdminDashboardController extends Controller
@@ -31,7 +32,6 @@ class AdminDashboardController extends Controller
 
         $userCount = User::countUsers();
         $employeesCount = Employee::countEmployees();
-
         $nonCompletedRepairsCount = Repair::countNonCompletedRepairs();
 
         return view('admin.dashboard', [
@@ -57,10 +57,7 @@ class AdminDashboardController extends Controller
             $employee->completedRepairsThisWeek = Employee::showCompletedRepairs($employee->id, 7);
         }
 
-
-
         $nonCompletedRepairsCount = Repair::countNonCompletedRepairs();
-
         return view('admin.employees', ['employees' => $employees, 'numberOfActiveRepairs' => $nonCompletedRepairsCount, 'repairs' => $repairs]);
     }
 
@@ -228,7 +225,7 @@ class AdminDashboardController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:employees',
+            'email' => ['required', 'string', 'email', 'max:255', new UniqueEmail],
             'password' => 'required|string|min:6|confirmed',
             'salary' => 'required|integer|min:0'
         ]);

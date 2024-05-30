@@ -61,19 +61,28 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $messages = [
+            'password.regex' => 'Hasło musi mieć co najmniej 8 znaków i zawierać co najmniej jedną cyfrę.',
+        ];
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[0-9]).{8,}$/',
+            ],
+        ], $messages);
 
         if (
             User::where('email', $request->email)->exists() ||
             Admin::where('email', $request->email)->exists() ||
             Employee::where('email', $request->email)->exists()
         ) {
-            return redirect()->route('registerForm')->with('error', 'Email jest w użyciu.');
+            return back()->with('error', 'Email jest w użyciu.');
         }
 
         User::create([
@@ -84,5 +93,6 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Zarejestrowano pomyślnie.');
     }
+
 
 }
