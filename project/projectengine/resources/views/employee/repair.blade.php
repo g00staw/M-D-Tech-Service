@@ -54,7 +54,7 @@
                         @csrf
                         <select name="status" class="form-control">
                             <option value="w trakcie realizacji">W realizacji</option>
-                            <option value="oczekiwanie na częsci">Oczekiwanie na częsci</option>
+                            <option value="oczekiwanie na części">Oczekiwanie na częsci</option>
                             <hr>
                         </select>
                         <button type="submit" class="btn btn-primary">Zmień status</button>

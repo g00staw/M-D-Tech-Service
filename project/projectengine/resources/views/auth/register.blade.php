@@ -44,26 +44,37 @@
                                                 class="form-control form-control-lg" placeholder="np. Jan Kowalski" />
                                             <label class="form-label" for="form3Example1cg">Twoje imię i
                                                 nazwisko</label>
+                                            @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <input type="email" name="email" id="form3Example3cg"
                                                 class="form-control form-control-lg" placeholder="twoj@email.com" />
                                             <label class="form-label" for="form3Example3cg">Twój Email</label>
+                                            @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <input type="password" name="password" id="form3Example4cg"
                                                 class="form-control form-control-lg" />
                                             <label class="form-label" for="form3Example4cg">Hasło</label>
+                                            @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <input type="password" name="password_confirmation" id="form3Example4cdg"
                                                 class="form-control form-control-lg" />
                                             <label class="form-label" for="form3Example4cdg">Powtórz hasło</label>
+                                            @error('password_confirmation')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
 
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" data-mdb-button-init data-mdb-ripple-init

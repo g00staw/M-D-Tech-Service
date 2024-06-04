@@ -67,7 +67,7 @@ class AuthController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:admins', 'unique:employees'],
             'password' => [
                 'required',
                 'string',
@@ -77,14 +77,6 @@ class AuthController extends Controller
             ],
         ], $messages);
 
-        if (
-            User::where('email', $request->email)->exists() ||
-            Admin::where('email', $request->email)->exists() ||
-            Employee::where('email', $request->email)->exists()
-        ) {
-            return back()->with('error', 'Email jest w użyciu.');
-        }
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -93,6 +85,4 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Zarejestrowano pomyślnie.');
     }
-
-
 }

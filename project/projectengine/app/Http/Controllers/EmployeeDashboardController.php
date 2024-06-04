@@ -197,9 +197,8 @@ class EmployeeDashboardController extends Controller
         if ($request->hasFile('profile_photo')) {
             $path = $request->file('profile_photo')->store('profile_photos', 'public');
             $user->profile_photo = $path;
+            $user->save();
         }
-
-        $user->save();
 
         return back()->with('success', 'Profil został pomyślnie zaktualizowany');
     }
