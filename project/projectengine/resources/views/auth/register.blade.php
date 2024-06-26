@@ -40,7 +40,7 @@
                                         @csrf
 
                                         <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="text" name="name" id="form3Example1cg"
+                                            <input type="text" name="name" id="form3Example1cg" minlength="4"
                                                 class="form-control form-control-lg" placeholder="np. Jan Kowalski" />
                                             <label class="form-label" for="form3Example1cg">Twoje imię i
                                                 nazwisko</label>
@@ -59,7 +59,7 @@
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="password" name="password" id="form3Example4cg"
+                                            <input type="password" name="password" minlength="8" id="form3Example4cg"
                                                 class="form-control form-control-lg" />
                                             <label class="form-label" for="form3Example4cg">Hasło</label>
                                             @error('password')
@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="password" name="password_confirmation" id="form3Example4cdg"
+                                            <input type="password" name="password_confirmation" minlength="8" id="form3Example4cdg"
                                                 class="form-control form-control-lg" />
                                             <label class="form-label" for="form3Example4cdg">Powtórz hasło</label>
                                             @error('password_confirmation')

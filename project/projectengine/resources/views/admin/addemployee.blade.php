@@ -36,19 +36,19 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Hasło</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" minlength="8" id="password" name="password" required>
                 @error('password')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Potwierdź Hasło</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                <input type="password" class="form-control" minlength="0" id="password_confirmation" name="password_confirmation"
                     required>
             </div>
             <div class="mb-3">
                 <label for="salary" class="form-label">Pensja</label>
-                <input type="number" class="form-control" id="salary" name="salary" value="{{ old('salary') }}"
+                <input type="number" class="form-control" id="salary" min="0" name="salary" value="{{ old('salary') }}"
                     required>
                 @error('salary')
                     <div class="alert alert-danger">{{ $message }}</div>
